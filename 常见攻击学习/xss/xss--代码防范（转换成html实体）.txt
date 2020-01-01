@@ -1,0 +1,1 @@
+通过htmlspecialchars，将“等转成html实体，使得攻击代码不能运行

@@ -1,0 +1,35 @@
+
+
+1 非法完成自动转账的js代码（利用document.getelementbyid（）.value来实现,自动填写表单，自动提交表单）
+
+2 (代码反射)把非法代码注入到支付宝,银行页面。将代码通过url指定的get参数，输入进去，引诱客户点击。（fill?pd_type=asdsasadasd",alert(4);//）
+
+举例：index.php?r=artical/post&name=<script>alert(2)</script>
+<?php
+echo $_GET['name']
+?>
+
+3 在转账页面查看代码（f12），寻找get的参数在js中到底有没有执行的可能。（重要）
+
+4 如果有执行的可能，默认情况下，会对url中的参数进行urlencode处理。所以不能传递<script></script>,所以想办法代码越狱。
+（urlencode：返回字符串，此字符串中除了-_.之外的所有非字母数字字符都将被替换成百分号（%）后跟两位十六进制数，空格则编码为加号（+））
+越狱前的样子：
+<script>
+...
+{
+...
+	pageAbsurl:"..._pdtype=adadsaddasdasd<script>alert(4)</script>"
+...
+}
+...
+</script>
+越狱后的样子(,号结束前面的语句，双引号分割，最后的再注释右边的双引号)
+pageAbsurl:"..._pdtype=adadsaddasdasd",alert(4)//"
+
+5 还是因为urlencode的问题，所以”被编成了%22,所以采取html实体编码和urlencode的方式，把“变为&quot再变为%26quot这个方式，最终把”传递进去,但结果还是失败。
+
+（1） 把“变为$quot,失败
+?key=&quot === key='' quot=''
+（2） $quot变为%26quot，确实可以在html上显示”，但是js不可以（因为html实体编码只在html上显示？&nbsp）
+
+6 原因script标签内，因为不认识html实体编码，所以$quot不会转成“，但是$26quot还是有其应用场景的，比如说<img src='x' onerror='var a = "123<？= $_GET['key']？>"'/>,因为是在html代码中，所以会转成"

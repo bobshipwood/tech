@@ -1,0 +1,4 @@
+binд©б╪об
+mysqld install mysql
+
+sc delete mysql

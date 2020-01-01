@@ -1,0 +1,72 @@
+git diff 比对工作区，和缓存区的文件
+
+git diff --cached 比较暂存区文件 与上一次commit 的差别。
+
+git rm -f 文件名（-f 如果已放入暂存区域）
+
+git rm --cached 文件名（暂存区域中删除，保留在工作区的时候，用这条）
+
+
+git checkout -- 文件名  把readme.txt文件在工作区的修改全部撤销，这里有两种情况：
+
+一种是readme.txt自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
+
+一种是readme.txt已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。
+
+总之，就是让这个文件回到最近一次git commit或git add时的状态
+
+
+git reset HEAD 文件名    可以取消暂存区的文件（unstage）
+
+git log --oneline   查看commit记录 
+
+
+//列出标签
+git tag    列出所有标签
+git tag -a v1.4 -m "my version 1.4" 创建附注标签（加-a）
+git show v1.4  列出指定标签的详细信息
+git tag -d v1.4-lw  删除标签
+
+git push origin --tags 将会把所有不在远程仓库服务器上的标签全部传送到那里。现在，当其他人从仓库中克隆或拉取，他们也能得到你的那些标签。
+
+git branch                      查看分支列表
+git branch iss53                创建分支
+git checkout iss53              切换分支
+git checkout -b iss53           创建并切换分支
+git branch -d hotfix            删除分支
+
+远程仓库
+git remote (-v) -v 显示详细的远程仓库权限
+
+git remote add <shortname> <url>  添加指定shortname的远程仓库
+
+git fetch [remote-name]   远程仓库中抓取（git fetch origin） 
+
+git push [remote-name] [branchname]（git push origin master） 
+只有当你有远程服务器的写入权限，并且之前没有人推送过时，这条命令才能生效。 当有人先推送到上游然后你再推送到上游，你的推送就会毫无疑问地被拒绝。 你必须先将他们的工作拉取下来并将其合并进你的工作后才能推送。
+git push origin --delete serverfix  删除远程分支
+git checkout -b [branch] [remotename]/[branch]  跟踪分支
+git checkout -b sf origin/serverfix
+
+变基
+基本操作
+git checkout experiment
+git rebase master
+git checkout master
+git merge experiment
+
+高级应用
+git rebase --onto master server client
+取出 client 分支，找出处于 client 分支和 server 分支的共同祖先之后的修改，然后把它们在 master 分支上重放一遍
+
+git rebase [basebranch] [topicbranch]   
+git rebase master server
+命令可以直接将特性分支（即本例中的 server）变基到目标分支（即 master）上。
+
+
+
+
+
+
+
+

