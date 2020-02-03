@@ -3,3 +3,8 @@
 304 读取浏览器本地缓存
 301 永久重定向
 302 临时重定向
+
+413 Request Entity too large 用户上传文件限制
+502 bad gateway         后端服务无响应（后端服务，tomcat或者php死掉）
+504 Gateway Time-out    后端服务执行超时（负载很高，或者取数据库的数据很慢）
+
