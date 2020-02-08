@@ -119,7 +119,7 @@ git checkout -- 文件名
 
 # 12 git remote 
 
-## 1 -v(查看简写及url)
+## 1 -v(查看稍微详细点的信息)
 
 ## 2 git remote add 简写 url
 

@@ -26,11 +26,19 @@ git checkout -b serverfix origin/serverfix     创建本地分支serverfix并跟
 
 ## 2  作用2，不断的拉取以便及时更新远程仓库引用 
 
-git fetch origin, 只有不断的拉取，origin/master等引用才会向前走。
+git fetch origin, 只有不断的拉取，origin/master等引用才会向前走。如果本地不执行git merge，他也有可能会和本地的分支产生越来越远的分离。
 
 ## 3  抓取并更新所有的远程仓库 git fetch --all
 
-# 4 git log 及git pull的说明
+# 4 git fetch + git merge = git pull
+
+git fetch origin
+
+在当前的本地分支状态下，输入
+
+git merge origin/master
+
+# 5 git log 及git pull的说明
 
 git log --oneline --decorate  查看各个分支当前所指的对象（包括head）
 
@@ -38,14 +46,14 @@ git log --oneline  --decorate  --graph --all  查看分叉历史及各个分支�
 
 git pull =git fetch + git merge，一般不用git fetch
 
-# 5 git push用法
+# 6 git push用法
 
 ## 1 远程和本地分支同名git push origin severfix
 
 ## 2 不同名，git push origin severfix(本地分支):awesomebranch（远程分支）
 ## 3 删除远端分支 git push origin --delete serverfix  
 
-# 6 分支合并
+# 7 分支合并
 
 ##　1 简单分支合并（fastforward）git只是简单的将指针向前移动
 
