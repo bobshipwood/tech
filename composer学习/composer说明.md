@@ -69,7 +69,7 @@ composer config -g repo.packagist composer https://packagist.phpcomposer.com
 
 # 5 疑惑点
 
-#### 1 删除包引申的疑惑
+#### 1 删除包引申的疑惑（应该正确）
 
 在json里面删除依赖，直接执行composer install，他提示要执行 composer update，执行composer update 后，这个包才被删除。我想install与update的区别是，install是以composer.lock 为基础，保证这个包下载回来的版本一致性。updata 则是更新composer.lock的操作？
 
@@ -81,11 +81,13 @@ composer config -g repo.packagist composer https://packagist.phpcomposer.com
 
 我在自己的框架中，"files": ["functions/bob.func.php"]通过这样的方式，发现只能写一下helpes函数。在这里定义的全局数组，发觉不生效
 
-#### 4 为啥要开启优化？开启优化的结果是啥？
+#### 4 为啥要开启优化？开启优化的结果是啥？（应该错误）
 
 开启优化，这个命令的本质是将 PSR-4/PSR-0 的规则转化为了 classmap 的规则，因为 classmap 中包含了所有类名与类文件路径的对应关系，所以加载器不再需要到文件系统中查找文件了。可以从 classmap 中直接找到类文件的路径。
 
 否则在每次在json写好psr-4自动加载后，都要composer dump-autoload一次，以便生成一次json文件？
+
+官方说明只要执行一次cpmposer install之后，就可以了
 
 
 
