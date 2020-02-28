@@ -1,0 +1,29 @@
+cache control  :  服务器的头  例子：max-age=20000  no-cache
+
+
+
+max-age 客户端缓存
+
+max-age =20的时候，当过了20秒后，在去看chrome，他显示from memory cache 所需时间是0，但是依然是200的状态码。
+只要请求的url没变，在20秒的时间内，即使服务器变更了资源，他依然是from memory cache
+
+
+
+
+
+
+max-age no-cache  每次都要发送服务期验证，由服务区决定是否返回200或者304， 如果http状态码为304的话，此时浏览器还是从本地读取缓存
+
+last-modified     服务器发向客户端，代表最后一次资源的更新时间
+if-modified-since 客户端收到信息后。直接把回服务器发来的时间
+
+etag             服务器发向客户端，代表文件的哈希值
+if-match 
+if-non-match     客户端收到哈希值后。再把哈希值告诉服务器，由服务器判断是否是新的文件
+
+
+
+
+
+
+max-age=20000 no-store        依然由客户端发起请求，服务端判断，只是这次的判断每次都是都认为是新的请求，每次请求的返回信息都是200 
