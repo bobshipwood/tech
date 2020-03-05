@@ -1,4 +1,4 @@
-[toc]
+[TOC]
 
 # 1 git branch
 
@@ -29,6 +29,10 @@ git checkout -b serverfix origin/serverfix     创建本地分支serverfix并跟
 git fetch origin, 只有不断的拉取，origin/master等引用才会向前走。如果本地不执行git merge，他也有可能会和本地的分支产生越来越远的分离。
 
 ## 3  抓取并更新所有的远程仓库 git fetch --all
+
+## 4  git fetch origin develop；git diff HEAD FETCH_HEAD，这个方法可以先拉取分支，然后查看这个分支与主分支有啥不同。
+
+
 
 # 4 git fetch + git merge = git pull
 
