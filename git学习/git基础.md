@@ -1,4 +1,4 @@
-[toc]
+[TOC]
 
 # 1 初识git
 
@@ -35,9 +35,11 @@ git clone git@github.com:bobshipwood/test.git aaa
 
 # 4 git diff 以文件补丁格式查看更详细的文件状态
 
-## 1 git diff 比较工作区和暂存区的文件差异
+## 1 git diff  对比工作区(未 git add)和暂存区(git add 之后)
 
-## 2 git diff --cached （--staged）比较暂存区和版本库的文件差异
+## 2 git diff --cached （--staged）对比暂存区(git add 之后)和版本库(git commit 之后)
+
+## 3 git diff HEAD: 对比工作区(未 git add)和版本库(git commit 之后)
 
 # 5 git add 命令
 
