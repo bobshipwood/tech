@@ -1,0 +1,36 @@
+fdisk -l（/dev/sdb）    如果不加，列出所有磁盘设备及分区表（sdb1）
+
+df -i   查看分区inodes使用状况
+df -h   查看格式化后的分区大小等情况，以合适的单位显示
+
+du -sh filename     列出某个目录或者某个文件的大小，以合适的单位展示
+
+
+mount /dev/sdb1   /newdir1/   将格式好的分区挂载到指定目录下
+mount -a   编写完/etc/fstab文件后，将所有分区挂载上
+unmout （-l）/dev/sdb1    加-l是因为卸载分区时候，刚好处在改目录里头，所以要加-l
+
+输入 cat /etc/fstab
+
+输出 UUID-sdasdasdsa-dadasdad-asdasdasddas   /   xfs    defaults   0  0
+
+其实第1列为分区名，可以未uuid的形式，也可以为/dev/sdb1
+第2列是挂载点
+第3列是分区的格式
+第4列一般为defaults，其实包含着rw（读和写），suid，dev，exec（允许文件可以执行，/分区千万要允许），auto（开机自动挂载），nouser（不允许root以外的用户挂载）
+，async（磁盘与内存不同步，系统每隔一段时间才会把内存写入到磁盘中）
+
+
+
+输入blkid
+输出全部磁盘的uuid值
+
+
+增加虚拟磁盘
+
+一 从磁盘空间中划分空间，建立swapfile
+dd if=/dev/zero of=/tmp/newfile bs=1M count=1024 
+二 格式化为swap分区
+mkswap -f /tmp/newdisk
+三 启用该swap分区
+swapon /tmp/newdisk
