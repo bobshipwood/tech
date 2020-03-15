@@ -56,3 +56,6 @@ extension = /usr/local/php/lib/php/extensions/no-debug-zts-20131226/mcrypt.so
 
 测试扩展有没有安装:
 php -m
+
+显示扩展详细信息
+php --ri swoole
