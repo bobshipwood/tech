@@ -26,3 +26,8 @@ chmod +x /etc/init.d/php56-fpm
 
 
 5 新的systemctl restart crond.service
+
+
+
+
+6 yum 软件安装目录----/etc/yum.repos.d/
