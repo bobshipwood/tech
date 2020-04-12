@@ -1,0 +1,1 @@
+mv composer.phar /usr/local/bin/composer

@@ -1,0 +1,38 @@
+旧的chkconfig命令
+启动配置文件在 /etc/init.d/  (把服务文件拷进去，如mysql.server 以mysqld服务名拷进去)
+查看所有服务      chkconfig --list
+加入或者删除服务  chkconfig --add 服务名  chkconfig --del 服务名 
+开机就启动        chkconfig  服务名  on
+启动服务          service 服务名 start    
+
+
+查看当前系统默认的target（有poweroff.target,rescure.target,network.target等等）
+systemctl get-default
+
+设置默认的target
+systemctl set-default multi-user.target
+
+查看当前target包含的所有unit(一个service属于一种unit(除了service，还有device，mount，socket，swap等等)，多个unit组成了一个target)
+systemctl list-dependencies multi-user.target
+
+
+所有的service，放置在/usr/lib/systems/system/下，例如可以查看sshd.service文件中[install]的内容，他就定义了该service属于哪一个target
+
+
+systemctl status crond.service //查看服务状态,看有没开启（active（running））等信息
+systemctl is-active crond.service //查看服务是否（active（running））
+
+systemctl enable crond.service //让某个服务开机启动（.service可以省略）
+systemctl disable crond.service //不让开机启动
+systemctl is-enabled crond //查看某个服务是否开启启动
+
+systemctl start crond.service //启动服务
+systemctl stop crond.service //停止服务systemctl restart crond.service //重启某个服务
+
+
+
+
+
+
+
+
