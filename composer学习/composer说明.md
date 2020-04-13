@@ -4,7 +4,17 @@
 
 #### 1 composer.phar   linux/win通用  2进制归档文件
 
+```bash
+php -r "copy('https://install.phpcomposer.com/installer', 'composer-setup.php');"
+```
 
+```bash
+可以指定安装目录，不指定默认在当前目录  php composer-setup.php --install-dir=bin
+```
+
+```bash
+删除脚本用，可以不删   php -r "unlink('composer-setup.php');"
+```
 
 #### 2 linux/mac 全局安装
 
@@ -26,10 +36,14 @@ composer init
 #### 2 根据当前composer.json 生成依赖关系，默认安装到vendor
 composer install
 
+composer install --no-plugins --no-scripts(composer因为不能用root而推荐的做法)
+
 #### 3 在当前项目引入特定的依赖包(xxx/xxx)
 composer require xxx/xxx 
 
 composer require symfony/httpfoundation
+
+composer update --no-plugins --no-scripts(composer因为不能用root而推荐的做法)
 
 #### 4 从dist安装，用特定的包(xxx/xxx)创建项目（(直接下载框架项目，其中dist为composer的缓存)）
 composer create-project --prefer-dist xxx/xxx 你的项目目录
@@ -48,7 +62,9 @@ composer self-update
 #### 8 优化一下自动加载
 composer dump-autoload --optimize
 
+#### 9 更新命名空间映射时候执行（psr-4）
 
+composer dumpautoload
 
 # 3 优化
 
@@ -81,15 +97,15 @@ composer config -g repo.packagist composer https://packagist.phpcomposer.com
 
 我在自己的框架中，"files": ["functions/bob.func.php"]通过这样的方式，发现只能写一下helpes函数。在这里定义的全局数组，发觉不生效
 
-#### 4 为啥要开启优化？开启优化的结果是啥？（应该错误）
+#### 4 为啥要开启优化？开启优化的结果是啥？
 
 开启优化，这个命令的本质是将 PSR-4/PSR-0 的规则转化为了 classmap 的规则，因为 classmap 中包含了所有类名与类文件路径的对应关系，所以加载器不再需要到文件系统中查找文件了。可以从 classmap 中直接找到类文件的路径。
 
 否则在每次在json写好psr-4自动加载后，都要composer dump-autoload一次，以便生成一次json文件？
 
-官方说明只要执行一次cpmposer install之后，就可以了
+***官方说明只要执行一次composer install之后，就可以了***
 
-
+***easysswoole用更新命名空间映射命令  composer dumpautoload***
 
 # 6 与自己框架的结合
 

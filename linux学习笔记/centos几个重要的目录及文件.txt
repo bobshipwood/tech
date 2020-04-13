@@ -1,4 +1,4 @@
-1 /etc/profile 
+﻿1 /etc/profile 
 
 不重启生效:
 echo "export PATH=/usr/local/mysql/bin:$PATH" >> /etc/profile
@@ -28,6 +28,8 @@ chmod +x /etc/init.d/php56-fpm
 5 新的systemctl restart crond.service
 
 
-
-
 6 yum 软件安装目录----/etc/yum.repos.d/
+
+
+7 usr/local/bin 可以直接执行文件.phar文件
+mv composer.phar /usr/local/bin/composer
