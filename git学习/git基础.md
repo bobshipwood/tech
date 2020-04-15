@@ -11,6 +11,8 @@ git config  --global  user.email "472164571@qq.com"
 
 git config --list
 
+
+
 # 2 获取远程仓库的两种方法
 
 ## 1 在现有仓库中推送至远程仓库
@@ -29,6 +31,8 @@ git clone git@github.com:bobshipwood/test.git aaa
 
 他会在当前目录下 新建一个aaa目录，并已存在.***git隐藏目录***，如果后面不加aaa,则会新建一个test目录,并且当前分支名命名为master
 
+
+
 # 3 查看文件状态 git status -s
 
 如果是刚clone完毕的状态，没有*untracked*的文件，没有*modified*的文件，没有*staged*的文件，全部都是*unmodified*.
@@ -41,6 +45,24 @@ git clone git@github.com:bobshipwood/test.git aaa
 
 ## 3 git diff HEAD: 对比工作区(未 git add)和版本库(git commit 之后)
 
+
+
+# 4.5 git 丢弃暂存区的内容
+
+
+
+## 1 git checkout --file 可以丢弃工作区的修改
+
+### 1 一种是文件自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
+
+### 2 一种是文件已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态；
+
+
+
+## 2 git reset HEAD <file>  丢弃暂存区的文件
+
+
+
 # 5 git add 命令
 
 ## 1 git 目录 文件名
@@ -49,7 +71,11 @@ git 目录时候，会把目录下面所有的文件都一并add
 
 ## 2 合并时候把有冲突的文件标记为已解决状态
 
+
+
 # 6 git commit 加入-a 会把所有跟踪过的文件自动添加至缓存区一并提交
+
+
 
 # 7 .gitignore 忽略文件（不想文件出现在*untracked*列表）
 
@@ -73,11 +99,15 @@ git 目录时候，会把目录下面所有的文件都一并add
 
 ## 5 要忽略匹配模式以外的文件或目录，可以在匹配模式内取反（！）
 
+
+
 # 8 git rm 的选项及应用场景
 
 ## 1 -f  强制删除在缓存区的文件
 
 ## 2 -cached 删除暂存区的文件，保留工作目录的。（当忘记.gitignore时候,这一个命令尤其有用）
+
+
 
 # 9 git mv 改名
 
@@ -88,6 +118,8 @@ mv 源文件  目标文件
 git rm 源文件
 
 git add 目标文件
+
+
 
 # 10 git log 命令行
 
@@ -102,6 +134,8 @@ git add 目标文件
 ## 3 --pretty=oneline  --graph
 
 每个提交放在一行显示，--graphy'
+
+
 
 # 11 文件回滚
 
@@ -118,6 +152,8 @@ git reset head 文件名
 一种是已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。
 
 git checkout -- 文件名
+
+
 
 # 12 git remote 
 
