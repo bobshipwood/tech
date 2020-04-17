@@ -1,0 +1,17 @@
+^向上移动一个记录
+~3向上移动多个记录
+
+
+移动head指针
+git checkout master^
+git checkout 哈希；git checkout HEAD^;        以“哈希”值为基础，向上移动一个记录移动
+git checkout HEAD~4;                                    以HEAD为基础，向上移动4次
+
+移动分支方向
+git branch -f master HEAD~3；                       以当前head为基础，将master分支向head前3个指向移动
+git branch -f master 哈希；                              将master分支向哈希值移动。
+
+
+回滚工作区
+git reset HEAD~1                                         回到HEAD的前一个指向
+git revert HEAD                                            删除c2，用c2'提交，其中c2'和c1是一致的。c1->c2->c2'
