@@ -1,7 +1,7 @@
 ./configure --prefix=/usr/local/php --with-apxs2=/usr/local/apache2.4/bin/apxs --with-config-file-path=/usr/local/php/etc --with-mysql --with-pdo-mysql --with-gd --with-jpeg-dir --with-png-dir --with-freetype-dir --with-iconv-dir --with-zlib-dir --enable-gd-native-ttf --enable-mbstring --with-curl --with-openssl --with-mcrypt
 
 
-./configure --prefix='/soft/php5.6.37' --with-config-file-path=/soft/php5.6.37 --enable-mbstring --with-curl --with-gd --with-zlib --with-pdo-mysql --with-openssl --with-fpm-user=fpm --with-fpm-group=fpm --enable-opcache --enable-fpm
+./configure --prefix='/soft/php5.6.37' --with-config-file-path=/soft/php5.6.37/etc --enable-mbstring --with-curl --with-gd --with-zlib --with-pdo-mysql --with-openssl --with-fpm-user=fpm --with-fpm-group=fpm --enable-opcache --enable-fpm
 
 
 要安装的包
