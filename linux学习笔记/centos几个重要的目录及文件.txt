@@ -1,17 +1,14 @@
-﻿1 /etc/profile 
+﻿1 /etc/profile （针对系统所有用户）
 
 不重启生效:
 echo "export PATH=/usr/local/mysql/bin:$PATH" >> /etc/profile
 source /etc/profile
 
-允许系统登陆后都能使用变量，命令行直接输入 echo “export myname=bob” >> /etc/profile
-然后source /etc/profile。
 
+2 /root/.bashrc（仅运行root用户）
 
-2 /root/.bashrc
-也可以加入 alias = 'pwd'
-
-仅允许当前用户使用变量，在用户主目录下的.bashrc最后一行，加入export name=xxx,然后运行source .bashrc
+如可以在该文件末尾加入 alias php56= 'pwd'
+然后运行source
 
 
 
