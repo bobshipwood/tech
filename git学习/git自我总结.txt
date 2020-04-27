@@ -1,0 +1,20 @@
+.gitignore只能忽略那些原来没有被track的文件，如果某些文件已经被纳入了版本管理中，则修改.gitignore是无效的。
+解决方法就是先把本地缓存删除（改变成未track状态），然后再提交:
+git rm -rf --cached .
+git add .git commit -m 'update .gitignore'
+
+
+git push origin master
+切到本地仓库中的“master”分支，获取所有的提交，再到远程仓库“origin”中找到“master”分支，将远程仓库中没有的提交记录都添加上去
+
+源就是本地，目标是远程
+git push origin <source>:<destination>
+
+git fetch origin foo
+Git 会到远程仓库的 foo 分支上，然后获取所有本地不存在的提交，放到本地的 o/foo 上。
+如果 git fetch 没有参数，它会下载所有的提交记录到各个远程分支
+
+
+
+
+
