@@ -1,0 +1,32 @@
+﻿1 /etc/profile （针对系统所有用户）
+
+不重启生效:
+echo "export PATH=/usr/local/mysql/bin:$PATH" >> /etc/profile
+source /etc/profile
+
+
+2 /root/.bashrc（仅运行root用户）
+
+如可以在该文件末尾加入 alias php56= 'pwd'
+然后运行source
+
+
+
+3 /etc/sysconfig/network-scripts/eth0
+网卡配置文件
+
+
+4  /etc/init.d/
+旧的service network restart  目录,
+cp /usr/local/src/php-5.6.37/sapi/fpm/init.d.php-fpm    /etc/init.d/php56-fpm
+chmod +x /etc/init.d/php56-fpm
+
+
+5 新的systemctl restart crond.service
+
+
+6 yum 软件安装目录----/etc/yum.repos.d/
+
+
+7 usr/local/bin 可以直接执行文件.phar文件
+mv composer.phar /usr/local/bin/composer

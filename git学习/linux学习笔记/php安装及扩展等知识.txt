@@ -1,0 +1,65 @@
+./configure --prefix=/usr/local/php --with-apxs2=/usr/local/apache2.4/bin/apxs --with-config-file-path=/usr/local/php/etc --with-mysql --with-pdo-mysql --with-gd --with-jpeg-dir --with-png-dir --with-freetype-dir --with-iconv-dir --with-zlib-dir --enable-gd-native-ttf --enable-mbstring --with-curl --with-openssl --with-mcrypt
+
+7.4编译安装
+./configure --prefix=/server/php --with-config-file-path=/server/php/etc --enable-mbstring --with-curl --enable-gd --with-zlib --with-pdo-mysql --with-openssl --with-fpm-user=fpm --with-fpm-group=fpm --enable-fpm
+
+
+要安装的包
+mysql
+perl-Module-Install
+libaio
+libaio-devel
+
+apache
+expat-devel
+pcre
+pcredevel
+
+
+php
+curl curl-devel
+libjpeg-turbo-devel.x86_64
+libpng libpng-devel
+openssl openssl-devel
+freetype freetype-devel
+epel-release
+libmcrypt-devel
+autoconf(安装扩展时候用)
+
+
+
+
+不重启生效:
+echo "export PATH=/usr/local/mysql/bin:$PATH" >> /etc/profile
+source /etc/profile
+
+
+
+php.ini 查找:
+php -i | grep php.ini
+
+
+
+
+安装扩展:
+
+进入扩展目录，然后借助两个工具phpize(生成configure文件)和php-config（功能应该是自动把扩展放入php的扩展模块存放目录）,
+/usr/local/php/bin/phpize 
+./configure --with-php-config=/usr/local/php/bin/php-config
+make
+make install
+
+编辑php.ini
+vim /usr/local/php/etc/php.ini
+extension = /usr/local/php/lib/php/extensions/no-debug-zts-20131226/mcrypt.so
+
+
+
+
+
+
+测试扩展有没有安装:
+php -m
+
+显示扩展详细信息
+php --ri swoole

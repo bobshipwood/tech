@@ -1,0 +1,19 @@
+[test]
+
+user = fpm
+group = fpm
+
+listen = /tmp/test.sock
+listen.mode = 0666
+
+pm = dynamic
+pm.max_children = 50
+pm.start_servers = 20
+pm.min_spare_servers = 10
+pm.max_spare_servers = 30
+pm.max_requests = 500
+
+php_admin_value[open_basedir] = /server/wwwroot/mine/:/tmp/
+
+request_slowlog_timeout = 5
+slowlog = /server/wwwroot/mine/logs/slow.log
