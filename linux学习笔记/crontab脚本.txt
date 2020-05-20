@@ -1,0 +1,4 @@
+1. 如果不需要保存任务执行日志，则
+         */1 * * * *   /usr/local/php/bin/php    /www/task/task.php    > /dev/null
+2. 如果需要保存任务执行日志，则
+         */1 * * * *   /usr/local/php/bin/php    /www/task/task.php    >> /var/log/task/task.log

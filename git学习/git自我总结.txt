@@ -8,7 +8,8 @@ git push origin master
 切到本地仓库中的“master”分支，获取所有的提交，再到远程仓库“origin”中找到“master”分支，将远程仓库中没有的提交记录都添加上去
 
 源就是本地，目标是远程
-git push origin <source>:<destination>
+git push origin   <source>:<destination>
+git pull   origin  <远程分支名>:<本地分支名>
 
 git fetch origin foo
 Git 会到远程仓库的 foo 分支上，然后获取所有本地不存在的提交，放到本地的 o/foo 上。
