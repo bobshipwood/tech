@@ -59,13 +59,6 @@ composer update
 ####  7 更新composer版本
 composer self-update
 
-#### 8 优化一下自动加载
-composer dump-autoload --optimize
-
-#### 9 更新命名空间映射时候执行（psr-4）
-
-composer dumpautoload
-
 # 3 优化
 
 #### 1 全国镜像
@@ -73,7 +66,27 @@ composer dumpautoload
 全局配置中国镜像，命令行输入
 composer config -g repo.packagist composer https://packagist.phpcomposer.com
 
+#### 2 优化的几个级别
 
+##### 1 composer dump-autoload -o（Level-1）
+
+这个命令的本质是将 PSR-4/PSR-0 的规则转化为了 classmap 的规则， 因为 classmap 中包含了所有类名与类文件路径的对应关系，所以加载器不再需要到文件系统中查找文件了。可以从 classmap 中直接找到类文件的路径。
+
+这个命令并没有考虑到当在 classmap 中找不到目标类时的情况，当加载器找不到目标类时，仍旧会根据PSR-4/PSR-0 的规则去文件系统中查找
+
+##### 2 composer dump-autoload -a（Level-2/A）
+
+执行这个命令隐含的也执行了 Level-1 的命令， 即同样也是生成了 classmap，区别在于当加载器在 classmap 中找不到目标类时，不会再去文件系统中查找（即隐含的认为 classmap 中就是所有合法的类，不会有其他的类了，除非法调用）
+
+如果你的项目在运行时会生成类，使用这个优化策略会找不到这些新生成的类。
+
+##### 3 composer dump-autoload --apcu  （Level-2/B）
+
+使用这个策略需要安装 apcu 扩展。
+
+这种策略是为了在 Level-1 中 classmap 中找不到目标类时，将在文件系统中找到的结果存储到共享内存中， 当下次再查找时就可以从内存中直接返回，不用再去文件系统中再次查找。
+
+在生产环境下，**这个策略一般也会与 Level-1 一起使用，** 执行`composer dump-autoload -o --apcu`, 这样，即使生产环境下生成了新的类，只需要文件系统中查找一次即可被缓存 ， **弥补了Level-2/A 的缺陷**。
 
 # 4 其他操作
 
@@ -85,27 +98,9 @@ composer config -g repo.packagist composer https://packagist.phpcomposer.com
 
 # 5 疑惑点
 
-#### 1 删除包引申的疑惑（应该正确）
-
-在json里面删除依赖，直接执行composer install，他提示要执行 composer update，执行composer update 后，这个包才被删除。我想install与update的区别是，install是以composer.lock 为基础，保证这个包下载回来的版本一致性。updata 则是更新composer.lock的操作？
-
-#### 2 composer selfupdate  所产生的疑惑
-
-会不会更新完之后，项目里的composer.lock也会跟着更新，导致全部依赖包都更新？
-
-#### 3 composer只是引入类，不能引入全局数组？
+#### 1 composer只是引入类，不能引入全局数组？
 
 我在自己的框架中，"files": ["functions/bob.func.php"]通过这样的方式，发现只能写一下helpes函数。在这里定义的全局数组，发觉不生效
-
-#### 4 为啥要开启优化？开启优化的结果是啥？
-
-开启优化，这个命令的本质是将 PSR-4/PSR-0 的规则转化为了 classmap 的规则，因为 classmap 中包含了所有类名与类文件路径的对应关系，所以加载器不再需要到文件系统中查找文件了。可以从 classmap 中直接找到类文件的路径。
-
-否则在每次在json写好psr-4自动加载后，都要composer dump-autoload一次，以便生成一次json文件？
-
-***官方说明只要执行一次composer install之后，就可以了***
-
-***easysswoole用更新命名空间映射命令  composer dumpautoload***
 
 # 6 与自己框架的结合
 
@@ -132,3 +127,5 @@ echo response::json(20002,'sadsad');
 不导入类的情况
 
 echo easys\web\pdoobj::one();
+
+#### 4 如果需要刷新，运行composer install即可
