@@ -11,6 +11,14 @@ git push origin master
 git push origin   <source>:<destination>
 git pull   origin  <远程分支名>:<本地分支名>
 
+查看关联信息
+git remote show origin
+
+修改当前本地分支关联
+git branch --set-upstream-to origin/分支名
+
+
+
 git fetch origin foo
 Git 会到远程仓库的 foo 分支上，然后获取所有本地不存在的提交，放到本地的 o/foo 上。
 如果 git fetch 没有参数，它会下载所有的提交记录到各个远程分支
