@@ -1,0 +1,5 @@
+-with-mysql=mysqlnd \
+
+--with-mysqli=mysqlnd \
+
+--with-pdo-mysql=mysqlnd 
