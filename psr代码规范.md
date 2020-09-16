@@ -30,10 +30,16 @@ const PI=3.14；
 const BATE_VERSION = '2.1.3';
 ```
 
-### 5 类中的属性--选择下划线
+### 5 类中的属性--选择小写驼峰
 
 ```
-protected $web_name = '西西欢迎你们';
+protected $webName = '西西欢迎你们';
+```
+
+### 6 表中字段--选择下划线
+
+```
+grade_one
 ```
 
 
