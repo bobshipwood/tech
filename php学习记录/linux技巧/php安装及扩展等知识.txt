@@ -1,3 +1,7 @@
+./configure --help
+查看帮助
+
+
 ./configure --prefix=/usr/local/php --with-apxs2=/usr/local/apache2.4/bin/apxs --with-config-file-path=/usr/local/php/etc --with-mysql --with-pdo-mysql --with-gd --with-jpeg-dir --with-png-dir --with-freetype-dir --with-iconv-dir --with-zlib-dir --enable-gd-native-ttf --enable-mbstring --with-curl --with-openssl --with-mcrypt
 
 7.4编译安装
@@ -18,13 +22,16 @@ pcredevel
 
 php
 curl curl-devel
-libjpeg-turbo-devel.x86_64
+libjpeg-turbo-devel
 libpng libpng-devel
 openssl openssl-devel
 freetype freetype-devel
 epel-release
 libmcrypt-devel
-autoconf(安装扩展时候用)
+autoconf gcc(安装扩展时候用)
+libxml2 libxml2-devel
+sqlite-devel
+oniguruma oniguruma-devel
 
 
 
@@ -32,11 +39,6 @@ autoconf(安装扩展时候用)
 不重启生效:
 echo "export PATH=/usr/local/mysql/bin:$PATH" >> /etc/profile
 source /etc/profile
-
-
-
-php.ini 查找:
-php -i | grep php.ini
 
 
 
@@ -54,12 +56,15 @@ vim /usr/local/php/etc/php.ini
 extension = /usr/local/php/lib/php/extensions/no-debug-zts-20131226/mcrypt.so
 
 
+swoole 扩展
+./configure --with-php-config=/soft/php/bin/php-config --enable-debug-log --enable-trace-log --enable-sockets --enable-openssl --enable-http2 --enable-swoole --enable-mysqlnd
 
 
+开机启动fpm
+编译安装php后
+cp  php源码包/sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
+chmod +x
 
+拷贝php.ini
+cp  php源码包/php.ini.development /soft/php/etc/php.ini
 
-测试扩展有没有安装:
-php -m
-
-显示扩展详细信息
-php --ri swoole
