@@ -14,16 +14,25 @@ source /etc/profile
 
 3 /etc/sysconfig/network-scripts/eth0
 网卡配置文件
+ip route  显示网关 ip等信息
 
 
-4  /etc/init.d/
-旧的service network restart  目录,
+4  旧的 /etc/init.d/
+service network restart
 cp /usr/local/src/php-5.6.37/sapi/fpm/init.d.php-fpm    /etc/init.d/php56-fpm
 chmod +x /etc/init.d/php56-fpm
 
+chkconfig --list  --add  --del --on 开机自启动   --off 开机不启动
+
+
 
 5 新的systemctl restart crond.service
-
+systemctl start crond.service
+systemctl stop crond.service
+systemctl is-enabled crond.service
+systemctl enable crond.service
+systemctl disable crond.service
+systemctl status crond.service
 
 6 yum 软件安装目录----/etc/yum.repos.d/
 
