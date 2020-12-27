@@ -1,0 +1,11 @@
+1 	下载,解压
+
+2 	make make install
+
+3 	echo "export PATH=/usr/local/mysql/bin:$PATH" >> /etc/profile
+	source /etc/profile
+ 
+4       cp 安装目录下/utils/redis_init_script /etc/init.d/redis
+
+5      参照redis_init_script,cp 安装目录下/redis.conf /etc/redis/6379.conf
+

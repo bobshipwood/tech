@@ -1,0 +1,45 @@
+假设只建立连接,不发送不接受
+
+0 linux系统一切皆文件,包括socket.
+1 维持一条TCP连接,都需要创建一个文件对象.
+2 linux操作系统对文件对象数量有限制.
+3 系统级:当前系统可打开的最大文件数量,通过fs.file-max参数修改;
+  用户级:指定用户可打开的最大数量,修改/etc/security/limits.conf.
+  进程级：单个进程可打开的最大数量，通过fs.nr_open参数可修改。
+4 一条空的TCP连接占内存3.3kb，4GB的内存可维持100w条长连接。
+
+假设发送数据的情况
+
+0 对TCP内核对象上开启接受缓存区
+1 接收缓存区大小可以配置，通过sysctl -a | grep rmem
+
+2 net.ipv4.tcp_rmem = 4096 87380 8388608
+  net.core.rmem_default = 212992
+  net.core.rmem_max = 8388608
+  第一行中第一个值是为TCP连接数所需分配的最少字节数，默认4K（内存）,最大8M之多（内存）
+
+假设发送和接收的情况
+0 开启发送缓存区
+1 消耗cpu资源执行发送过程
+2 sysctl -a | grep wmem
+  net.ipv4.tcp_wmem = 4096 87380 8388608
+  net.core.wmem_default = 212992
+  net.core.wmem_max = 8388608
+  第一行中第一个值是发送缓存区的最小值，默认4K（内存），如果数据很大，该缓存区也会比默认值大。
+
+
+服务端(4g内存)百万并发连接达成
+0 客户端也有并发数限制。客户端的ip_local_port_range内核最大参数只能设置1024 * 65535  约6W4千个连接请求，
+1 假设20个客户端，每个5w个连接，设置为 10240 65535
+2 查看当前活动连接数量
+ss -n | grep ESTAB | wc -l
+1000024
+3 查看当前内存占用情况（内核slab占了）
+cat /proc/meminfo
+Memtotal    3922956 kb
+Memfree       96652 kb
+memavailable   6448 kb
+buffers       44397kb
+。。。。。
+slab        3241244kb
+

@@ -2,6 +2,9 @@
 
 ./configure --with-php-config=/usr/local/php/bin/php-config  --enable-swoole (举例子)
 
+ ./configure --with-php-config=/soft/php/bin/php-config --enable-sockets --enable-openssl --enable-http2 --enable-swoole --enable-mysqlnd
+
+
 make clean(删除在这个目录下编译过得obj等文件)
 
 make 
