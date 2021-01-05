@@ -1,0 +1,10 @@
+1 Swoole\Runtime::enableCoroutine(true);一键携程客户端(如sleep，redis连接，读取等代码)
+
+携程是写在go里面，如redis是堵塞io，当遇到他时候，该携程会交出携程调度权，给其他携程调用
+
+go(function（） {
+	echo file_put_contents('aa.txt','aa',FILE_APPEND);
+})
+
+2 linux strace 调用
+
