@@ -9,3 +9,8 @@
 
 5      参照redis_init_script,cp 安装目录下/redis.conf /etc/redis/6379.conf
 
+
+另外一种更省心，待验证
+
+直接在安装完成的目录下，执行install_server.sh,然后就可以 service redis_6379 start
+
