@@ -1,1 +1,0 @@
-cp {php-5.3.x-source-dir}/sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm

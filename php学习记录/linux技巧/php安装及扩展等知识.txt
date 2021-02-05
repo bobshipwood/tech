@@ -42,30 +42,19 @@ echo "export PATH=/usr/local/mysql/bin:$PATH" >> /etc/profile
 source /etc/profile
 
 
-
-
 安装扩展:
-
 进入扩展目录，然后借助两个工具phpize(生成configure文件)和php-config（功能应该是自动把扩展放入php的扩展模块存放目录）,
 /usr/local/php/bin/phpize 
 ./configure --with-php-config=/usr/local/php/bin/php-config
 make
 make install
 
-编辑php.ini
-vim /usr/local/php/etc/php.ini
+编辑php.inivim /usr/local/php/etc/php.ini
 extension = /usr/local/php/lib/php/extensions/no-debug-zts-20131226/mcrypt.so
 
 
-swoole 扩展
+
+安装swoole 扩展
 ./configure --with-php-config=/soft/php/bin/php-config --enable-debug-log --enable-trace-log --enable-sockets --enable-openssl --enable-http2 --enable-swoole --enable-mysqlnd
 
-
-开机启动fpm
-编译安装php后
-cp  php源码包/sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
-chmod +x
-
-拷贝php.ini
-cp  php源码包/php.ini.development /soft/php/etc/php.ini
 

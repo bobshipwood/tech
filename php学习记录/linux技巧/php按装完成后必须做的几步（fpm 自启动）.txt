@@ -1,0 +1,9 @@
+0 查看php.ini安装路径 php -i | grep php.ini
+
+1 cp 源码包php.ini-production 复制到 安装目录下/php.ini
+
+2 cp 源码包下的/sapi/fpm/init.d.php-fpm /etc/init.d/php-fpm
+chmod +x
+
+chkconfig  --add  php-fpm
+chkconfig php-fpm on
