@@ -32,6 +32,7 @@ autoconf gcc(安装扩展时候用)
 libxml2 libxml2-devel
 sqlite-devel
 oniguruma oniguruma-devel
+libcurl-devel.x86_64
 
 
 
