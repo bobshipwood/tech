@@ -128,4 +128,4 @@ echo response::json(20002,'sadsad');
 
 echo easys\web\pdoobj::one();
 
-#### 4 如果需要刷新，运行composer install即可
+#### 4 如果需要增加规则行，运行composer install即可
