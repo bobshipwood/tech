@@ -1,16 +1,30 @@
 1 	下载,解压
 
-2 	make make install
+2 	make
 
 3 	echo "export PATH=/usr/local/mysql/bin:$PATH" >> /etc/profile
-	source /etc/profile
- 
+	source /etc/profile 
 4       cp 安装目录下/utils/redis_init_script /etc/init.d/redis
 
 5      参照redis_init_script,cp 安装目录下/redis.conf /etc/redis/6379.conf
 
 
-另外一种更省心，待验证
 
-直接在安装完成的目录下，执行install_server.sh,然后就可以 service redis_6379 start
+
+
+
+另外一种更省心
+
+直接在目录下(/utils)，执行install_server.sh,
+
+选择目录
+Please select the redis executable path [/soft/redis-5.0.9/src/]
+然后输出
+Config file    : /etc/redis/6379.conf
+Log file       : /var/log/redis_6379.log
+Data dir       : /var/lib/redis/6379
+Executable     : /usr/local/bin/redis-server
+Cli Executable : /usr/local/bin/redis-cli
+
+最后就可以 service redis_6379 start
 

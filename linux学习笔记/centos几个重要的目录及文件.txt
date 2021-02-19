@@ -23,6 +23,7 @@ cp /usr/local/src/php-5.6.37/sapi/fpm/init.d.php-fpm    /etc/init.d/php56-fpm
 chmod +x /etc/init.d/php56-fpm
 
 chkconfig --list  --add  --del --on 开机自启动   --off 开机不启动
+chkconfig redis_6379 on
 
 
 
