@@ -1,12 +1,18 @@
 [TOC]
 
-# 1 session_start()知识点
+# 1 session_start()知识点（自己总结的）
 
 ## 1 session_start 前不能有任何输出
 
-## 2 脚本首次运行session_start时候，这个函数向客户端发送一个session_id保存在客户端中，还在服务器创建一个和客户端同名的session文件。然后就可以使用seesion数组了
+## 2 脚本首次运行session_start时候，这个函数向客户端发送一个session_id保存在客户端中，还在服务器创建一个和客户端同名的session文件。（首次访问还不能使用session数组）
 
-## 3 当客户端再次访问相同脚本的时候，先判断客户端有没有sessionid，变量名为PHPSESSID，如果有，则直接以头函数携带这个session来使用这个session_id开启会话，也不用在服务端创建文件了，直接找这个同名的session_id的session文件
+## 3 当客户端再次访问相同脚本的时候，先判断客户端有没有sessionid，如果有，则直接以头函数携带这个session来使用这个session_id开启会话。
+
+### 3.1 如果此刻服务端找到同名session文件，则可以使用session数组了
+
+ ### 3.2 如果此刻服务端找不到同名的session文件（被垃圾回收或者其他情况），则服务端再次创建同名文件之后，才可以使用session数组。
+
+
 
 # 2 session在linux下会比windows好
 
