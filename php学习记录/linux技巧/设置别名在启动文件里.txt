@@ -1,0 +1,5 @@
+.bash_profile
+
+最后一行 添加
+
+alias  php7 = /home/work/soft/php/bin/php
