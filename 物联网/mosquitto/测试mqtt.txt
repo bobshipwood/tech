@@ -1,0 +1,6 @@
+发布消息
+
+mosquitto_pub -u pub -P pub -t 'discussion/topic' -m '发布消息'
+
+订阅消息
+mosquitto_sub -u test -P test -t 'discussion/topic'

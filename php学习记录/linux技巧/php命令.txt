@@ -1,3 +1,8 @@
 php -i | grep php.ini     查看php.ini文件所在目录
 php -m  查看它的扩展
 php --ri swoole 显示扩展详细信息
+
+
+php --version    显示php版本
+
+php --ini  显示php.ini文件路径，

@@ -1,0 +1,22 @@
+1 安装
+yum install mosquitto-devel
+yum install mosquitto
+
+
+2 查询
+rpm -ql mosquitto
+
+
+3 配置文件
+
+ /etc/mosquitto/mosquitto.conf
+
+allow_anonymous false
+password_file /etc/mosquitto/pwfile
+
+4 配置2个用户（-c是清理之前的用户表）
+mosquitto_passwd -c /etc/mosquitto/pwfile pub
+mosquitto_passwd  /etc/mosquitto/pwfile pub
+
+5 开启服务
+mosquitto -c ./mosquitto.conf
