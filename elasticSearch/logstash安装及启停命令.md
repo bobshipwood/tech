@@ -31,8 +31,6 @@ yum install logstash  yum install mysql-connector-java
 
 /etc/logstash/      配置文件所在目录
 
-[toc]
-
 # 2 命令行运行命令
 
 ## 1 测试配置文件命令 
