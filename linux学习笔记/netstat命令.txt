@@ -1,0 +1,8 @@
+1 netstat -r  显示路由
+
+
+2 netstat -ept(c) 
+-e             display other/more information (如用户名) 
+-p             display PID/Program name for sockets
+-t             仅仅显示tcp信息
+-c             每秒刷新 
