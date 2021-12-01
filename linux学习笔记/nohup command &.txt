@@ -1,7 +1,7 @@
 &
 后台运行 一旦退出session会终止 不受ctrl c影响
 
-nohub 
+nohup 
 前台使用，ctrl c 会终止 但退出session不受影响
 
-一般 nohub command & 来运行命令
+一般 nohup command & 来运行命令
