@@ -141,6 +141,14 @@ rabbitmq-plugins  enable rabbitmq_management
 
 安装成功，管控台默认端口号：15672
 
+```
+rabbitmq-plugins  enable rabbitmq_web_stomp
+```
+
+安装web-storm插件
+
+
+
 ### 九、登录管控台
 
 浏览器打开
