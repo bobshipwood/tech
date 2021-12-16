@@ -3,9 +3,7 @@
 ### 一、准备依赖包
 
 ```
-yum install 
-build-essential openssl openssl-devel unixODBC unixODBC-devel 
-make gcc gcc-c++ kernel-devel m4 ncurses-devel tk tc xz
+~~yum install build-essential openssl openssl-devel unixODBC unixODBC-devel make gcc gcc-c++ kernel-devel m4 ncurses-devel tk tc xz
 ```
 
 ### 二、下载erlang-18.3-1
@@ -15,6 +13,8 @@ wget www.rabbitmq.com/releases/erlang/erlang-18.3-1.el7.centos.x86_64.rpm
 ```
 
 直接在centos7下yum install erlang，  版本为erlang.x86_64 0:R16B-03.18.el7，根据https://www.rabbitmq.com/which-erlang.html，可以适用于rabbitmq3.6.5
+
+然后再yum install -y erlang-sd_notify
 
 ### 三、下载socat-1.7.3.2
 
@@ -198,3 +198,7 @@ rabbitmq-server -deched --后台启动节点
  rabbitmqctl start_app --启动节点上的应用
 
  rabbitmqctl stop --关闭节点
+
+### 十、设置开机自启动
+
+systemctl enable rabbitmq-server
