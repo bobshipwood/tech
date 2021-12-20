@@ -1,0 +1,7 @@
+在用命令行 redis-cli 密码登陆（redis-cli -a  password）就OK了。
+
+
+
+也可以在脚本处修改
+vi /etc/init.d/redis
+$CLIEXEC -a "password" -p $REDISPORT shutdown
