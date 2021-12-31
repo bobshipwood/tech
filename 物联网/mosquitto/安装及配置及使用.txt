@@ -9,7 +9,7 @@ rpm -ql mosquitto
 
 3 ÅäÖÃÎÄ¼ş
 
- /etc/mosquitto/mosquitto.conf
+/etc/mosquitto/mosquitto.conf
 
 allow_anonymous false
 password_file /etc/mosquitto/pwfile
