@@ -1,5 +1,5 @@
 发布消息
-mosquitto_pub -u pub -P pub -t 'discussion/topic' -m '发布消息'
+mosquitto_pub -u admin -P admin123 -t 'testtopic' -m '发布消息111'
 
 
 
