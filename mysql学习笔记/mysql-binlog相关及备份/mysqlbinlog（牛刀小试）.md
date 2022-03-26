@@ -16,7 +16,7 @@ mysql -uroot -p123456 oldboy < /opt/old_bak.sql
 
 #### 2  -d  截取指定库的binlog
 
-#### 3 按照位置截取 
+#### 3 按照位置截取 （-r   --result-file=name  将输入转储到文件 ）
 
 mysqlbinlog -d oldboy mysqlbin_oldboy.000001 --start-position=360 --stop-position=430 -r position.sql
 

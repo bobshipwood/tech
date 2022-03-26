@@ -1,0 +1,14 @@
+查看关联信息
+git remote show origin
+
+修改当前本地分支关联
+git branch --set-upstream-to origin/分支名
+
+创建关联关系（git push pull不用烦）
+
+1 git checkout -b foo o/main;
+在本地创新foo分支，并切换至foo分支下，然后让其跟踪远端o/main分支
+
+2 git branch -u o/main foo（推荐）
+设置本地foo分支关联远程分支，如果刚好在foo分支下，那就可以git branch -u o/main
+

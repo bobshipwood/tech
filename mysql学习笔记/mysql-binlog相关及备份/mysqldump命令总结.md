@@ -22,7 +22,7 @@ mysqldump -u用户名 -p'密码' -B （-F） （-d）（-t） 数据库名（空
 
 #### 4 -F
 
-刷新binlog参数
+--flush-logs, 在开始导出前,洗掉在MySQL服务器中的日志文件..(刷新binlog参数)
 
 #### 5 --single-transaction(重点)
 
