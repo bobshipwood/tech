@@ -4,6 +4,8 @@ user = fpm
 group = fpm
 
 listen = /tmp/test.sock
+//listen = 127.0.0.1:9002
+
 listen.mode = 0660
 
 pm = dynamic

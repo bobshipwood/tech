@@ -10,3 +10,5 @@ git push origin HEAD --force
 git reset --hard commit_id
 回滚
 
+git remote add origin https://gitee.com/yuetengyun/asadesa.git
+加远程仓库

@@ -1,0 +1,16 @@
+composer require voku/simple_html_dom
+composer require voku/portable-utf8 # if you need e.g. UTF-8 fixed output
+
+use voku\helper\HtmlDomParser;
+
+
+// Create DOM from URL or file
+$html = file_get_html('http://www.microsoft.com/');
+$elementOrFalse = $dom->findOneOrFalse('.bey .c-red');
+$elementsOrFalse = $dom->findMultiOrFalse('.bey .c-red');
+// Extract links
+foreach($html->find('a') as $element)
+    echo $element->href . '<br>';
+// Extract images
+foreach($html->find('img') as $element)
+    echo $element->src . '<br>';

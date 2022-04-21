@@ -12,3 +12,6 @@ git branch --set-upstream-to origin/分支名
 2 git branch -u o/main foo（推荐）
 设置本地foo分支关联远程分支，如果刚好在foo分支下，那就可以git branch -u o/main
 
+3 gitee中的方法：
+git remote add origin https://gitee.com/yuetengyun/asadesa.git
+git push -u origin master
