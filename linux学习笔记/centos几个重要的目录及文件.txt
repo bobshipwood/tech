@@ -17,26 +17,9 @@ source /etc/profile
 ip route  显示网关 ip等信息
 
 
-4  旧的 /etc/init.d/
-service network restart
-cp /usr/local/src/php-5.6.37/sapi/fpm/init.d.php-fpm    /etc/init.d/php56-fpm
-chmod +x /etc/init.d/php56-fpm
 
-chkconfig --list  --add  --del --on 开机自启动   --off 开机不启动
-chkconfig redis_6379 on
+5 yum 软件安装目录----/etc/yum.repos.d/
 
 
-
-5 新的systemctl restart crond.service
-systemctl start crond.service
-systemctl stop crond.service
-systemctl is-enabled crond.service
-systemctl enable crond.service
-systemctl disable crond.service
-systemctl status crond.service
-
-6 yum 软件安装目录----/etc/yum.repos.d/
-
-
-7 usr/local/bin 
+6 usr/local/bin 
 可以直接执行文件.phar文件 mv composer.phar /usr/local/bin/composer
