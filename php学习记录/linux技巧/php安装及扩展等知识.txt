@@ -2,7 +2,10 @@
 查看帮助
 
 
-./configure --prefix=/usr/local/php --with-apxs2=/usr/local/apache2.4/bin/apxs --with-config-file-path=/usr/local/php/etc --with-mysql --with-pdo-mysql --with-gd --with-jpeg-dir --with-png-dir --with-freetype-dir --with-iconv-dir --with-zlib-dir --enable-gd-native-ttf --enable-mbstring --with-curl --with-openssl --with-mcrypt
+/configure --prefix=/usr/local/php --with-apxs2=/usr/local/apache2.4/bin/apxs --with-config-file-path=/usr/local/php/etc --with-mysql=/usr/local/mysql --with-mysqli --with-pdo-mysql --with-libxml-dir --with-gd --with-jpeg-dir --with-png-dir --with-freetype-dir --with-iconv-dir --with-zlib-dir --with-bz2 --with-openssl --with-mcrypt --enable-soap --enable-gd-native-ttf --enable-mbstring --enable-sockets --with-curl --enable-fpm
+
+
+
 
 7.4编译安装
 ./configure --prefix=/server/php --with-config-file-path=/server/php/etc --enable-mbstring --with-curl --enable-gd --with-zlib --with-pdo-mysql --with-openssl --with-fpm-user=fpm --with-fpm-group=fpm --enable-fpm

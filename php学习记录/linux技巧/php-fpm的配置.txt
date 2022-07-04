@@ -1,3 +1,8 @@
+复制php安装目录下的./sapi/fpm/init.d.php-fpm /etc/init.d/fpm5.6
+
+
+
+
 [test]
 
 user = fpm
@@ -13,7 +18,7 @@ pm.max_children = 50(最大进程数)
 pm.start_servers = 20（开始进程数）
 pm.min_spare_servers = 10（动态调节最小进程数）
 pm.max_spare_servers = 30（动态调节最大进程数）
-pm.max_requests = 500（单进程多少个请求后重启，防止内存泄漏，默认为0）
+pm.max_requests = 50000（单进程多少个请求后重启，防止内存泄漏，默认为0）
 
 php_admin_value[open_basedir] = /server/wwwroot/mine/:/tmp/
 request_slowlog_timeout = 5

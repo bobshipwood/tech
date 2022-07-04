@@ -1,0 +1,1 @@
+expose_php = off   F11 后 隐藏resoponse中的x_power_by_php信息
