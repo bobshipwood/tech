@@ -14,6 +14,8 @@
 
 小程序提供了原生的Tabbar支持，我们可以在app.json声明tabBar字段来定义Tabbar页
 
+**注意Tabbar页面初始化之后不会被销毁**
+
 ```json
 {
   "tabBar": {
@@ -28,7 +30,7 @@
 
 # tabbar页面触发方式及生命周期对应关系
 
-Tab 切换对应的生命周期（以 A、B 页面为 Tabbar 页面，C 是从 A 页面打开的页面，D 页面是从 C 页面打开的页面为例）如表3-6所示，注意Tabbar页面初始化之后不会被销毁。
+Tab 切换对应的生命周期（以 A、B 页面为 Tabbar 页面，C 是从 A 页面打开的页面，D 页面是从 C 页面打开的页面为例）
 
 | 当前页面        | 触发后的页面  | 触发的生命周期（按顺序）                |
 | --------------- | ------------- | --------------------------------------- |
@@ -38,6 +40,6 @@ Tab 切换对应的生命周期（以 A、B 页面为 Tabbar 页面，C 是从 A
 | C               | A             | c.onUnload,A.onShow                     |
 | C               | B             | c.onUnload,B.onload,B.onshow            |
 | D               | B             | d.onunload,c.onunload,B.onload,B.onshow |
-| D(从转发进入)   | A             | d.onunload,a.onshow,a.onshow            |
-| D（从转发进入） | B             | d.onunload,b.onshow,b.onshow            |
+| D(从转发进入)   | A             | d.onunload,a.onload,a.onshow            |
+| D（从转发进入） | B             | d.onunload,b.onload,b.onshow            |
 
