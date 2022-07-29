@@ -1,0 +1,21 @@
+工作区   --add ---->暂存区-----commit------>版本库
+
+
+1   比较工作区和暂存区的差异
+
+git diff
+
+
+2 比较工作区和版本库的差异
+
+git diff commitid 或者 git diff head
+
+
+3 比较暂存区和版本库的差异
+
+git diff --cached  commitid 或者 git diff --cached head
+
+
+4 比较2次提交id的差异
+
+git diff  commitid1  commitid2 
