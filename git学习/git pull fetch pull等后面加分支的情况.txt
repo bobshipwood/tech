@@ -13,7 +13,7 @@ git push origin main:newBranch
 
 git fetch:
 
-如果 git fetch 没有参数，它会下载所有的提交记录到各个远程分支
+如果 git fetch 没有参数，它会下载所有的提交记录（每个远程分支）
 
 git fetch origin foo
 Git 会到远程仓库的 foo 分支上，然后获取所有本地不存在的提交，放到本地的 o/foo 上。
