@@ -1,0 +1,9 @@
+1 登录-p时候一定不要输入密码，否则会被history记录
+或者（输入命令之前加个空格，然后设置histcontrol）
+echo “export HISTCONTROL=ignorespace” >> /etc/profile                
+source /etc/profile                                    
+
+2 更改系统语言，cat /etc/sysconfig/i18n
+#LANG = “zh_CN.GB2312”
+LANG = "zh_CN.utf8"
+/etc/sysconfig/i18n  === source /etc/sysconfig/i18n
