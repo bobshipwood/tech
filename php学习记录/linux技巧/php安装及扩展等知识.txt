@@ -2,28 +2,11 @@
 查看帮助
 
 
-/configure --prefix=/usr/local/php --with-apxs2=/usr/local/apache2.4/bin/apxs --with-config-file-path=/usr/local/php/etc --with-mysql=/usr/local/mysql --with-mysqli --with-pdo-mysql --with-libxml-dir --with-gd --with-jpeg-dir --with-png-dir --with-freetype-dir --with-iconv-dir --with-zlib-dir --with-bz2 --with-openssl --with-mcrypt --enable-soap --enable-gd-native-ttf --enable-mbstring --enable-sockets --with-curl --enable-fpm
-
-
-
-
 7.4编译安装
 ./configure --prefix=/server/php --with-config-file-path=/server/php/etc --enable-mbstring --with-curl --enable-gd --with-zlib --with-pdo-mysql --with-openssl --with-fpm-user=fpm --with-fpm-group=fpm --enable-fpm
 
 
-要安装的包
-mysql
-perl-Module-Install
-libaio
-libaio-devel
-
-apache
-expat-devel
-pcre
-pcredevel
-
-
-php
+php7安装7的时候所需要的：
 curl curl-devel
 libjpeg-turbo-devel
 libpng libpng-devel
@@ -36,11 +19,9 @@ libxml2 libxml2-devel
 sqlite-devel
 oniguruma oniguruma-devel
 libcurl-devel.x86_64
+gcc-c++
 
-
-
-
-不重启生效:
+加入环境变量，不重启生效:
 echo "export PATH=/usr/local/mysql/bin:$PATH" >> /etc/profile
 source /etc/profile
 
@@ -52,12 +33,14 @@ source /etc/profile
 make
 make install
 
-编辑php.inivim /usr/local/php/etc/php.ini
+拷贝并编辑php.ini
+cp php.ini-development
+vim /usr/local/php/etc/php.ini
 extension = /usr/local/php/lib/php/extensions/no-debug-zts-20131226/mcrypt.so
 
 
 
 安装swoole 扩展
-./configure --with-php-config=/soft/php/bin/php-config --enable-debug-log --enable-trace-log --enable-sockets --enable-openssl --enable-http2 --enable-swoole --enable-mysqlnd
+./configure --with-php-config=/soft/php/bin/php-config --enable-openssl --enable-http2
 
 

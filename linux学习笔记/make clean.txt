@@ -1,0 +1,5 @@
+make clean(删除在这个目录下编译过得obj等文件)
+
+make 
+
+make install
