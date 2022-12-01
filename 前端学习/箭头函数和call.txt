@@ -1,0 +1,16 @@
+1 本来要运行的函数，变成通过call一个对象来代替本身的this，然后运行
+
+function fn() {
+	        console.log(this.a)
+}
+var a = 100;
+fn.call({a:10})//输出10
+fn()//输出100
+
+2 如果本身是箭头函数，那就全是100，this相当于一层层往上调取直到全局变量
+let fn = () => {
+	console.log(this.a)
+}
+var a = 100;
+fn.call({a:10})//输出100
+fn()//输出100

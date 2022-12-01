@@ -1,0 +1,42 @@
+function Father {
+	this.name = '老头';
+	this.age = '40'
+	this.money = 100000
+	//如果这样写的话，每个new 对象的时候都会创建自己的函数，不省内存,不推荐
+	this.getmoney = function () {}
+}
+
+Father.prototype 表示自己的原型对象，一般用于以下场景，以便节省内存开销
+一般用Father.prototype.getmoney = function () {}
+
+
+
+function Son() {
+
+	Father.call(this)// 相当于把father的3个属性This.name,this.age,this.money用在此处
+	this.name = '儿子'//此次相当于又把this.name =‘儿子’赋值了一遍，
+	this.age = '3'
+	
+}
+
+//__proto__表示往上再走一层的原型对象
+//继承方法一般这样写，表示儿子的原先的基础上，往上再走一层就是父亲的原型对象
+son.prototype.__proto__ = father.proto
+
+
+
+
+es6的话，正常写就行了
+class Father {
+	constructor(arg) {}
+}
+
+class Son extends Father{
+	constructor(arg) {
+		super(arg)
+		//下面写儿子的属性
+	}
+}
+
+
+

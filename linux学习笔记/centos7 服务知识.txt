@@ -20,7 +20,7 @@ systemctl set-default multi-user.target
 systemctl list-dependencies multi-user.target
 
 
-所有的service，放置在/usr/lib/systems/system/下，例如可以查看sshd.service文件中[install]的内容，他就定义了该service属于哪一个target
+所有的service，放置在/usr/lib/systemd/system/下，例如可以查看sshd.service文件中[install]的内容，他就定义了该service属于哪一个target
 
 
 systemctl status crond.service //查看服务状态,看有没开启（active（running））等信息

@@ -1,0 +1,6 @@
+安装swoole 扩展
+./configure --with-php-config=/soft/php/bin/php-config --enable-openssl --enable-http2 --enable-swoole-curl
+
+--enable-openssl 使用操作系统提供的 libssl.so 动态连接库
+--enable-http2  开启http2支持
+--enable-swoole-curl    启用对 SWOOLE_HOOK_NATIVE_CURL 的支持，阿里云oss必用

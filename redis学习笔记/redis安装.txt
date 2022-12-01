@@ -1,30 +1,34 @@
-1 	下载,解压
+Systemd 安装（失败）：
 
-2 	make
+1 解压目录，运行make（关键是用src目录下redis-server，redis-cli出现） 
+2 拷贝systemd-redis_server.service.service文件至/usr/lib/systemd/system/下，并改名为redis.service,为了不用写这么长的字（可直接作用于systemct start redis）
+3 编辑该文件
+4 启动失败
 
-3 	echo "export PATH=/usr/local/mysql/bin:$PATH" >> /etc/profile
-	source /etc/profile 
-4       cp 安装目录下/utils/redis_init_script /etc/init.d/redis
+System V安装：
+直接在目录下(/utils/install_server.sh,)，需要注释一端systemv的话才执行，
 
-5      参照redis_init_script,cp 安装目录下/redis.conf /etc/redis/6379.conf
-
-
-
-
-
-
-另外一种更省心
-
-直接在目录下(/utils)，执行install_server.sh,
-
-选择目录
-Please select the redis executable path [/soft/redis-5.0.9/src/]
-然后输出
+Port           : 6379
 Config file    : /etc/redis/6379.conf
 Log file       : /var/log/redis_6379.log
 Data dir       : /var/lib/redis/6379
 Executable     : /usr/local/bin/redis-server
 Cli Executable : /usr/local/bin/redis-cli
+Copied /tmp/6379.conf => /etc/init.d/redis_6379
+/var/run/redis_6379.pid exists, process is already running or crashed
 
 最后就可以 service redis_6379 start
+
+
+
+
+原始安装：
+1 	下载,解压
+2 	make make install(推荐用make PREFIX=/usr/local/redis install)
+3 	echo "export PATH=/usr/local/mysql/bin:$PATH" >> /etc/profile
+	source /etc/profile 
+4       cp 安装目录下/utils/redis_init_script /etc/init.d/redis
+5      参照redis_init_script,cp 安装目录下/redis.conf /etc/redis/6379.conf
+
+
 

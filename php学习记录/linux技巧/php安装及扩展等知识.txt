@@ -40,7 +40,6 @@ extension = /usr/local/php/lib/php/extensions/no-debug-zts-20131226/mcrypt.so
 
 
 
-°²×°swoole À©Õ¹
-./configure --with-php-config=/soft/php/bin/php-config --enable-openssl --enable-http2
+
 
 
