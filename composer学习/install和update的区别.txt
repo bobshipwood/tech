@@ -1,0 +1,23 @@
+composer update     先检查composer.json   然后分析他们再拉更新至vendor   并且写入composer.lock文件
+
+composer install    当本地有composer.lock文件时候，他会读取该文件，并以此为标准去下载依赖
+					当本地没有composer.lock文件时候，他就和composer update没分别
+										
+
+
+
+
+开发中，应保证服务器，本地都使用同样的一份composer.lock文件，应使用composer install
+
+
+
+当新增了依赖，还是修改了依赖的版本，又或者是删除了依赖。（应该是指对composer.json文件操作时）
+这时候如果你执行composer install的时候，是不会有任何变更的，但你会得到一个警告信息
+Warning: The lock file is not up to date with the latest changes in composer.json. You may be getting outdated dependencies. Run update to update them.
+所以需要执行composer update
+ 
+
+
+
+缩小范围版本：
+composer update monolog/monolog
