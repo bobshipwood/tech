@@ -1,6 +1,48 @@
 1 小程序的页面层级为10级
 
-2 小程序的缓存空间上限为10mb，已经达到上限，再通过wx.setStorage写入缓存会触犯fail回调
+2 小程序宿主环境会管理不同小程序的数据缓存，不同小程序的本地缓存空间是分开的(考虑到同一个设备可以登录不同微信用户，宿主环境还对不同用户的缓存进行了隔离，避免用户间的数据隐私泄露。)，每个小程序的缓存空间上限为10MB，如果已经达到上限，再通过wx.setStorage写入缓存会触犯fail回调
 
 3 所有页面的脚本逻辑都跑在同一个JsCore线程，页面使用setTimeout或者setInterval的定时器，然后跳转到其他页面时，这些定时器并没有被清除，需要开发者自己在页面离开的时候进行清理。
+
+4 页面构造器Page()中onload在页面没被销毁之前只会触发1次;在onLoad的回调中，可以获取当前页面所调用的打开参数option。
+
+5 页面构造器Page()中的onshow，一般从别的页面返回到当前页面时，当前页的onShow方法都会被调用。
+
+6 在页面初次渲染完成时，Page构造器参数所定义的onReady方法会被调用，onReady在页面没被销毁前只会触发1次。
+
+7 页面不可见时，Page构造器参数所定义的onHide方法会被调用，这种情况会在使用wx.navigateTo切换到其他页面、底部tab切换时触发。
+
+8 当前页面使用wx.redirectTo或wx.navigateBack返回到其他页时，当前页面会被微信客户端销毁回收，此时Page构造器参数所定义的onUnload方法会被调用。
+
+9 官方实际应用例子，列表，详情页（和网页URL一样，页面URL上的value如果涉及特殊字符（例如：&字符、?字符、中文字符等，详情参考URI的RFC3986说明 ），需要采用UrlEncode后再拼接到页面URL上。）
+// pages/list/list.js
+// 列表页使用navigateTo跳转到详情页
+wx.navigateTo({ url: 'pages/detail/detail?id=1&other=abc' })
+
+// pages/detail/detail.js
+Page({
+  onLoad: function(option) {
+        console.log(option.id)
+        console.log(option.other)
+  }
+})
+
+10 如果一个页面被多次创建，并不会使得这个页面所在的JS文件被执行多次，而仅仅是根据初始数据多生成了一个页面实例（this），在页面JS文件中直接定义的变量，在所有这个页面的实例间是共享的。
+例如，若从页面A使用wx.navigateTo跳转到页面B，再使用wx.navigateTo跳转到页面A，此时页面栈中有三个页面：A、B、A。这时两个A页面的实例将共享它的JS文件中Page构造器以外直接定义的变量。有经验的开发者可以利用这个特性，但一些开发者也会错误地共享出一些变量，因而使用时要小心。
+代码示例（好的例子，利用上诉特性）：
+
+console.log('加载 page.js')
+var count = 0
+Page({
+  onLoad: function() {
+    count += 1
+    console.log('第 ' + count + ' 次启动这个页面')
+  }
+})
+
+
+11 减少数据通信过程。执行setData时候：
+11.1.不要过于频繁调用setData，应考虑将多次setData合并成一次setData调用；
+11.2.数据通信的性能与数据量正相关，因而如果有一些数据字段不在界面中展示且数据结构比较复杂或包含长字符串，则不应使用setData来设置这些数据；
+11.3.与界面渲染无关的数据最好不要设置在data中，可以考虑设置在page对象的其他字段下
 

@@ -2,13 +2,17 @@
 
 # 页面层级最大为10层
 
+使用 wx.navigateTo({ url: 'pageD' }) 可以往当前页面栈多推入一个 pageD，此时页面栈变成 [ pageA, pageB, pageC, pageD ]。
+使用 wx.navigateBack() 可以退出当前页面栈的最顶上页面，此时页面栈变成 [ pageA, pageB, pageC ]。
+使用wx.redirectTo({ url: 'pageE' }) 是替换当前页变成pageE，此时页面栈变成 [ pageA, pageB, pageE ]，当页面栈到达10层没法再新增的时候，往往就是使用redirectTo这个API进行页面跳转。
+
 | 方法                            | 当前页面栈                                                   | 方法之后页面栈                 | 限制                 | 补充                                                         |
 | ------------------------------- | ------------------------------------------------------------ | ------------------------------ | -------------------- | ------------------------------------------------------------ |
-| wx.navigateTo({ url: 'pageD' }) | [ pageA, pageB, pageC ]                                      | [ pageA, pageB, pageC, pageD ] | 只能打开非TabBar页面 | 此时当前页调用页面的onHide参数，页面没有被微信客户端回收     |
+| wx.navigateTo({ url: 'pageD' }) | [ pageA, pageB, pageC ]                                      | [ pageA, pageB, pageC, pageD ] | 只能打开非TabBar页面 | 此时当前页调用页面的onHide参数，页面没有被微信客户端回收（没有调用onUnload） |
 | wx.navigateBack()               | [ pageA, pageB, pageC, pageD ]                               | [ pageA, pageB, pageC ]        |                      | 此时当前页被微信客户端回收，调用页面的onUnload               |
 | wx.redirectTo({ url: 'pageE' }) | [ pageA, pageB, pageC ]                                      | [ pageA, pageB, pageE ]        | 只能打开非TabBar页面 | 此时当前页被微信客户端回收，调用页面的onUnload               |
 | wx.switchTab({ url: 'pageF' })  | 此时原来的页面栈会被清空（除了已经声明为Tabbar页pageA外其他页面会被销毁） | [ pageF ]                      | 只能打开Tabbar页面   | 此时点击Tab1切回到pageA时，pageA不会再触发onLoad，因为pageA没有被销毁。 |
-| wx. reLaunch({ url: 'pageH' })  | 重启小程序                                                   | [ pageH ]                      |                      |                                                              |
+| wx. reLaunch({ url: 'pageH' })  | 重启小程序                                                   | [ pageH ]                      |                      | pageH调用onUnload，页面被销毁                                |
 
 # 页面tabbar
 
