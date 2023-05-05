@@ -1,21 +1,49 @@
 
 
-1、**FROM** table1 left join table2 on 将table1和table2中的数据产生笛卡尔积，生成Temp1
+### 正常sql语句
 
-2、**JOIN** table2 所以先是确定表，再确定关联条件
+select distinct
 
-3、**ON** table1.column = table2.columu 确定表的绑定条件 由Temp1产生中间表Temp2
+```
+<select_list>
+```
 
-4、**WHERE** 对中间表Temp2产生的结果进行过滤 产生中间表Temp3
+from
 
-5、**GROUP BY** 对中间表Temp3进行分组，产生中间表Temp4
+```
+<left_table><join_type>
+```
 
-6、**HAVING** 对分组后的记录进行聚合 产生中间表Temp5
+join <right_table> on <join_condition>
 
-7、**SELECT** 对中间表Temp5进行列筛选，产生中间表 Temp6
+where<where_condition>
 
-8、**DISTINCT** 对中间表 Temp6进行去重，产生中间表 Temp7
+group by<group_by_list>
 
-9、**ORDER BY** 对Temp7中的数据进行排序，产生中间表Temp8
+having<having_condition>
 
-10、**LIMIT** 对中间表Temp8进行分页，产生中间表Temp9
+order by<order_by_condition>
+
+limit<limit_number>
+
+### 执行顺序：
+
+from  <left_table>
+
+on <join_condition>
+
+<join_type> JOIN <right_table>
+
+where <where_condition>
+
+group by <groub_by_list>
+
+having<having condition>
+
+select
+
+distinct<select_list>
+
+order by <order_by_condition>
+
+limit<limit_number>
