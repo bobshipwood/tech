@@ -1,0 +1,14 @@
+# 第一步，把所有的mysite.com/api/interface转换成mysite.com/interface
+
+location /api {
+  rewrite ^(.*)\/api(.*)$ $1$2;
+}
+
+# 第2步，把所有的mysite.com/interface的请求，转发到siwei.me/interface
+
+location /interface {
+ proxy_pass http://siwei.me 
+}
+
+上诉配置，把
+http://mysite.com/api/interface/blogs/all(理论上说一个接口，返回json)，在服务端的nginx做了变换，相当于访问了http://siwei.me、interface/blogs/all
