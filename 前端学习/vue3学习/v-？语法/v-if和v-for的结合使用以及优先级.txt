@@ -1,0 +1,27 @@
+当一起使用时，v-if比v-for有更高的优先级，所以不建议两者在同一个元素中使用：
+
+如果一定要用，可以用template：
+
+
+    <div id='app'>
+        <p> 全部的技术是：  </p>
+        <p> v-for 与 v-if 的结合使用, 只打印出 以"n"开头的技术： <p>
+        <ul>
+            <template v-for="tech in technologies" :key="tech">
+              <li v-if="tech.indexOf('n') === 0">
+                {{tech}}
+              </li>
+            </template>
+        </ul>
+    </div>
+    <script>
+        Vue.createApp({
+            data() {
+              return{
+                technologies: [
+                    "nvm", "npm", "node", "webpack", "ecma_script"
+                ]
+              }
+            }
+        }).mount('#app')
+    </script>

@@ -1,0 +1,23 @@
+只在开发模式下生效：
+
+
+
+module.exports = {
+  devServer: {
+    proxy: {
+//1 对所有的以’/api’开头的url做处理
+      '/api': {
+        target: 'http://siwei.me',//3 转发到siwei.com中
+        secure: true,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': '',//2.把url中的‘api’去掉
+        },
+      }
+    },
+  },
+}
+
+1 对所有以/api开头的url进行处理（http://localhost：8080/api）
+2  把url中的"/api"去掉
+3 把新的url请求，转发到siwei.com中

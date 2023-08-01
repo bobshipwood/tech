@@ -1,0 +1,24 @@
+
+视图中的渲染（/public/*.html）
+
+1 用户在浏览器输入网址，按回车键
+2 浏览器加载所有的内容（js，html内容），此时尚未解析
+3 浏览器加载Vue.js
+4 Vue.js程序被执行，发现页面中的Directive并进行相关的解析。
+5 Html的内容被替换，展现给用户
+
+总结，像php，jsp等（服务器渲染），vue也有，但是因为是一种javascript框架，所以只能与标签结合使用。
+v-on.v-bind.v-if.v-for等，只要是以v开头的，都是Directive
+注意：
+在directive中使用表达式：
+1 表达式a>1,有效
+2 普通语句，a=1.(这个是声明，不会生效)
+3 控制语句 return a (不会生效)
+如
+<div v-if="a>100"></div> (it works)
+<div v-if="return false"></div> (it dosen`t works)
+
+
+
+
+

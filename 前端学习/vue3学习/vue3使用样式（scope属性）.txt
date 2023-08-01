@@ -1,0 +1,14 @@
+1 作用于全局的样式（直接写到style）
+
+<style>
+td {
+	boder-bottom: 1px solid grey;
+}
+</style>
+
+2 作用当前vue页面的css样式
+<style scoped>
+td {
+	boder-bottom: 1px solid grey;
+}
+</style>

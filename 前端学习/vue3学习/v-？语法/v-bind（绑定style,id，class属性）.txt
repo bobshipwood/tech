@@ -1,0 +1,38 @@
+对于所有的属性，都可以使用v-bind.
+
+<div v-bind:style =""></div>
+生成
+<div style=""></div>
+
+
+<div v-bind:id =""></div>
+生成
+<div id=""></div>
+
+
+<div v-bind:class =""></div>
+生成
+<div class=""></div>
+
+
+
+<div id='app'>
+        <p v-bind:style="'color:' + my_color">Vue.js 学起来好开心~ (颜色： {{my_color}}) </p>
+        <button @click="change_color()">变颜色</button>
+    </div>
+    <script>
+        Vue.createApp({
+            data() {
+              return {
+                my_color: 'green'
+              }
+            },
+            methods:{
+              change_color(){
+                this.my_color = this.my_color == 'green' ? 'red' : 'green'
+                console.info("== 新颜色是: ", this.my_color)
+              }
+            }
+        }).mount('#app')
+
+    </script>

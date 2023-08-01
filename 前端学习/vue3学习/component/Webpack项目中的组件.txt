@@ -1,0 +1,79 @@
+每一个.vue文件，可以认为是一个组件
+
+<template>
+  <div >
+    <my-logo title="博客详情页"></my-logo>   
+  </div>
+</template>
+
+<script>
+import MyLogo from '@/components/Logo.vue'
+
+export default {
+  components: {
+    MyLogo
+  },
+}
+</script>
+
+
+其实components中的MyLogo是简写，复杂的写法是
+MyLogo: Mylogo
+前面的MyLogo是template的名字，后面的MyLogo是import进来的代码
+
+在template时，必须写为<my-logo></my-logo>
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------
+如果需要向组件传递参数，
+那么在components/Logo.vue中，加上props，在调用时候，传递字符串即可：<my-logo title="博客详情页"></my-logo>
+
+
+<template>
+  <div class='logo'>
+    <h1>{{title}}</h1>
+    <img src='http://files.sweetysoft.com/image/570/siwei.me_header.png'/>
+  </div>
+</template>
+
+<script>
+export default {
+  props: ['title'],//加上这个声明
+}
+</script>
+
+如果要接收的不是字符串，而是变量：
+<template>
+  <div >
+    <my-logo :title="title"></my-logo>   
+  </div>
+ <unput type='button' @cliclk=change() value='单击修改标题'>
+</template>
+
+<script>
+import MyLogo from '@/components/Logo.vue'
+
+export default {
+   data: function() {
+	return {
+	     title: '博客列表页'	
+	}
+   }
+   methods: {
+	change: function(){
+		this.title = '标题被修改过了'
+	}
+   }
+
+
+  
+  components: {
+    MyLogo
+  },
+}
+</script>
+
+
+
+
+
+

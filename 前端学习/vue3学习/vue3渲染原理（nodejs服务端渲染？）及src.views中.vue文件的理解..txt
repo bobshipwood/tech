@@ -1,0 +1,86 @@
+Vue3，Webpack渲染步骤（只针对服务端渲染index.html?）：
+1 js入口文件(app.js)
+默认渲染pubilc/index.html,然后在底部增加<script>标签
+<script type="text/javascript" src="js/chunk-vendors.js"></script>
+<script type="text/javascript" src="js/app.js"></script>
+
+其中app.js就定义了所有包含的入口文件，该文件把所有src目录下的文件组织到了一起，方便vue的调用
+
+
+2 静态的html页面（index.html,最外层的模板）
+http://localhost::8080,实际上打开的是public/index.html,<div id="app"></div>就是将来会动态变化的内容。
+
+3 main.js中的vue定义（第2层模板）
+Src/main.js的主要内容,
+import App from './App.vue'
+createApp(App).use(store).use(router).mount('#app')
+
+上诉代码表示加载了App.vue，
+Src/App.vue的主要内容：
+
+<template>
+<router-view/>
+</template>
+
+<style></style>
+
+<script></script>
+
+上面代码的template就是第2层模板，所有<router-view>中的内容会被自动替换，
+
+4 渲染的原理：浏览器页面从不整体刷新，所有的页面变化限定在index.html中的<div id="app"></div>代码中，所有的动作都可以靠url来触发，依靠vue.js的核心组件，vue-router来实现
+
+
+
+src/views/*.vue文件的理解
+
+<template>
+  <div>
+    <input type="button" @click="show_my_value()" value="showing"/>
+  </div>
+  <div>
+    {{ my_value }}
+  </div>
+</template>
+
+<script>
+export default {
+  data: function () {
+    return {
+      message: '你好Vue! 本消息来自于变量',
+      my_value: '你好，vue3'
+    }
+  },
+  methods: {
+    show_my_value: function(name) {
+      //注意下面的this.my_value,要用到this关键字
+      alert(this.my_value)
+      alert(name)
+    }
+  }
+}
+</script>
+
+<style>
+</style>
+
+
+data: function () {
+    return {
+      message: '你好Vue! 本消息来自于变量',
+      my_value: '你好，vue3'
+    }
+  },
+可以简写成
+data () {
+return {
+      message: '你好Vue! 本消息来自于变量',
+      my_value: '你好，vue3'
+    }
+  },
+
+@click="show_my_value()",不传参时，收到的name 为undefined
+
+@click 很多时候等同于v-on:click
+
+<input type="button" v-on:click="show_my_value('jim')" value='show'/>

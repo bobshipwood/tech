@@ -1,0 +1,21 @@
+1 data方法用于申明页面会出现的变量
+2 mounted表示页面被vue渲染好之后的钩子方法，会立刻执行
+（可以认为等同于created）
+
+
+
+export default {
+  data: function() {
+    return {
+      blog: {}
+    }
+  },
+  mounted() {
+    axios.get('/api/interface/blogs/show?id='+this.$route.query.id).then((response) => {
+       console.info(response.data)
+       this.blog = response.data.result
+    }, (response) => {
+       console.error(response)
+    });
+    alert(this.hi("jim"))
+  },
