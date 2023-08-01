@@ -1,0 +1,12 @@
+vue.js有两种路由模式
+hash模式  http://www.ac.com/#/hello(url带#)
+h5模式   http://www.ac.com/hello
+
+如果在h5模式下，vue.js项目不存在这个hello.html文件的话，nginx将会报404错误
+
+解决办法很简单
+就是当nginx找不到的时候，使用try_files来解决：
+该指令的作用：如果当对应的url无法解析，则尝试使用某url。
+location / {
+ try_files $uri $uri/ /index.html
+}
