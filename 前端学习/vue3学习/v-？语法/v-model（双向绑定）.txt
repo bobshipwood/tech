@@ -1,0 +1,15 @@
+<p>你好，{{name}}</p>
+<input type='text' v-model="name"/>
+
+//这里定义了app，在其他地方就可以用app.$data.name来修改name的变量
+let app = Vue.createApp({
+data() {
+    return {
+	name: 'vue.js(默认)'
+    }
+}
+}).mount('#app')
+
+如果在vue页面中，
+在代码（<script>）中访问，就是this.my_value
+

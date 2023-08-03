@@ -1,0 +1,9 @@
+npm install sass sass-loader
+
+
+
+<style lang='scss'>
+td {
+border-bottom: 1px solod grey;
+}
+</style>

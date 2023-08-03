@@ -1,0 +1,123 @@
+1 修改package.jsom
+
+  "dependencies": {
+    "vuex": "^4.0.0-0" //对应vue3.x
+  },
+
+2 新建store文件
+文件名 src/vuex/store/index.js,该文件的作用是在整个vue的项目中，声明我们要使用vuex进行状态管理
+
+import { createStore } from 'vuex'
+import { INCREASE } from '@/vuex/mutation_types'
+
+export default createStore({
+  state: {
+    points: 0
+  },
+  mutations: {
+
+    /*
+      这里定义了一个方法： INCREASE, 是以变量作为方法名，算是元编程的方式
+      不喜欢麻烦的同学也可以直接用普通方式定义该方法， 例如  
+      INCREASE() { ... }
+    */
+    [INCREASE]() {
+      this.state.points = this.state.points + 1 
+    }
+  },
+  actions: {
+  },
+  modules: {
+  },
+})
+
+state： 表示状态。可以认为state是一个数据库。保存了各种数据，但无法直接访问里面的数据
+
+mutations: 表示变化，可以认为所有的state都是由mutation来驱动变化的，也可以认为他是setter
+
+
+3 新增文件src/vuex/mutation_types.js
+
+// 大家做项目的时候, 要统一把 mutation type定义在这里.
+// 类似于一个 方法列表.
+//其好处是维护时可以看到某个mutation有多少种状态
+export const COUNT_DOWN = 'COUNT_DOWN'
+export const INCREASE = 'INCREASE'
+
+
+4 新增路由/src/touters/index.js,
+
+
+
+import ShowCounter1 from '@/views/ShowCounter1'
+import ShowCounter2 from '@/views/ShowCounter2'
+const routes = [
+    
+    {
+      path: '/show_counter_1',
+      name: 'ShowCounter1',
+      component: ShowCounter1
+    },
+   {
+      path: '/show_counter_2',
+      name: 'ShowCounter2',
+      component: ShowCounter2
+    },
+
+5 新增两个页面 src/views/ShowCounter1.vue,ShowCounter2.vue
+<template>
+
+  <div>
+  
+    <h1> 这个页面是 1号页面 </h1>//除了这个标题不同，其他都一样
+    <p>使用说明： 本页面演示的是：同一个session 在不同的页面下，会保持同一个变量的状态（也就是值）. 
+    先在当前页面多次点击 按钮，然后点击本页面的 “计时页面2”， 会发现变量是保持住的， <br/>
+    在那个页面多次点击之后，再跳转会本页，发现 这个points的值还是会保持的 <br/>
+    </p>
+    {{points}} <br/>
+    <input type='button' @click='increase' value='点击增加1'/><br/>
+    <router-link :to="{name: 'ShowCounter2'}">
+          计时页面2
+    </router-link>
+  
+  </div>
+</template>
+
+<script>
+import { useStore } from 'vuex'
+import { INCREASE } from '@/vuex/mutation_types'
+
+export default {
+  computed: {
+    points() {
+      return this.$store.state.points
+    }
+  },
+  store: useStore(),
+  mounted() {
+  },
+  methods: {
+    increase() {
+      this.$store.commit(INCREASE, this.$store.state.points + 1)//这里可以不加this.$store.state.points + 1，因为加1不是在这里定义的，而是在vuex/store/mutataions下定义的
+    }
+  }
+}
+
+
+</script>
+
+
+6 总结上述例子
+在vue页面中，首先有个points，points来自于计算属性computed,当计算因子发生变化时，页面也会发生变化。
+然后，再有用户触发this.$store.commit(INCREASE)，实际调用src/vuex/store/index.js里面的 [INCREASE]() 方法，使得该属性变化
+最后，反作用于vue页面
+    
+
+
+
+
+
+
+
+
+

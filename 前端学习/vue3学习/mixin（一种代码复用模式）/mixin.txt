@@ -1,0 +1,35 @@
+1 定义
+在src/mixins/common_hi.js中，创建
+
+export default {
+  methods: {
+    hi: function(name){
+      return "你好, " + name;
+    }
+  }
+}
+
+
+2 vue中包含使用
+
+<template>
+  <div>
+    {{hi("from view")}}
+  </div>
+</template>
+
+<script>
+import CommonHi from '@/mixins/common_hi.js'
+export default {
+  mixins: [CommonHi],
+  mounted() {
+    alert( this.hi('from script code'))
+  }
+}
+</script>
+
+
+在mount中使用，必须带有this,
+mixins: [CommonHi],中括号表示数组，
+
+

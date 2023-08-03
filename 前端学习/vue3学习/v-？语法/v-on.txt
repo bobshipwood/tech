@@ -1,0 +1,35 @@
+1 v-on直接写在表达式
+
+<button v-on:click = "count += 1" >+1</button>
+
+data() {
+	return { count:0}
+}
+
+2 v-on直接写方法名
+
+<button v-on:click = "increasecount" >+1</button>
+
+data() {
+	return { count:0}
+}
+
+methods：{
+   increase_count(){
+	this.count += 1;
+   }
+}
+
+2 v-on直接写方法名+参数
+{{message}}
+<button v-on:click = "sayhi('明日之星')" >跟我打个招呼</button>
+
+data() {
+	return { message:'这个一个click方法的调用参的
+例子}
+
+methods：{
+   sayhi：function(name){
+	this.message = “你好啊”+ name;
+   }
+}

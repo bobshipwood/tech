@@ -1,0 +1,41 @@
+ <div id='app'>
+        <p>本页显示parent和child区域的click与click.prevent的用法:</p>
+        
+        <div @click="click_parent()" style='width: 500px; border: 1px solid red'>
+          <p>本区域属于parent, 点击这里，只调用 parent的click事件 </p>
+
+          <p @click.stop='click_child()' style='width: 400px; border: 1px solid blue'>
+          本区域属于child1, 点击这里，只调用child的click事件 </p>
+
+          <p @click='click_child()' style='width: 400px; border: 1px solid blue'>
+          本区域属于child2, 点击这里，会调用两个click事件（parent + child) </p>
+        </div>
+    </div>
+
+    <script>
+    Vue.createApp({
+        methods: {
+            click_child: function(){
+                alert("您点击了child 区域")
+            },
+            click_parent: function(){
+                alert("您点击了parent 区域")
+            }
+        }            
+    }).mount('#app')
+    </script>
+
+
+
+核心是@click.stop='click_child()'，效果等同于stopProoagation。该效果点击child1区域的时候，不会触发parent的event
+
+这样的event modifiers有好几个，
+stop propagation : 停止（调用了event.stopPropagation()方法）后被触发
+prevent：调用了event.preventDefault后被触发
+capture： 子元素的事件可以在该元素中被触发
+self: 事件的event.target是本元素时被触发
+once:事件最多被触发一次
+passive：为移动设备时使用（在addEventListeners定义时增加passive选项）
+
+
+以上，可以连续使用，如v-on:click.prevent.self
