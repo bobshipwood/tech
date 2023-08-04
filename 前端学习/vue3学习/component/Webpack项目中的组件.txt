@@ -46,7 +46,7 @@ export default {
   <div >
     <my-logo :title="title"></my-logo>   
   </div>
- <unput type='button' @cliclk=change() value='单击修改标题'>
+ <input type='button' @click=change() value='单击修改标题'>
 </template>
 
 <script>
@@ -62,10 +62,7 @@ export default {
 	change: function(){
 		this.title = '标题被修改过了'
 	}
-   }
-
-
-  
+   }  
   components: {
     MyLogo
   },

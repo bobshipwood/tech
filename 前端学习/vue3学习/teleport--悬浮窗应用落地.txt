@@ -1,0 +1,54 @@
+在*.vue中，首先声明了一个teleport块，然后通过<teleport to="body">把该代码放到了<body>标签上（相当于原先的body在下层）
+
+这种功能在某些场景下非常有用，比如在创建弹出框、对话框、模态框等需要将组件挂载到 DOM 树之外的情况下。（chatgpt的回答）
+
+
+<template>
+  <button @click="switchModalWindow()">开启悬浮窗(modal window)</button>
+  <teleport to="body">
+    <div v-if="isModalOpen" class="modal">
+      <div class="content">
+        <p>学习使我快乐~</p>
+        <button @click="switchModalWindow()">关闭悬浮窗</button>
+      </div>
+    </div>
+  </teleport>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      isModalOpen: false
+    }
+  },
+  methods: {
+    switchModalWindow(){
+      this.isModalOpen = !this.isModalOpen
+    }
+  },
+}
+</script>
+
+<style>
+.modal{
+  z-index: 10;
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  left: 0;
+  top: 0;
+  background-color: rgba(0,0,255,0.1);
+}
+
+.content {
+  z-index: 20;
+  width: 400px;
+  margin: 0 auto;
+  margin-top: 100px;
+  padding: 50px;
+  height: auto;
+  border: 1px solid red;
+  background-color: white;
+}
+</style>

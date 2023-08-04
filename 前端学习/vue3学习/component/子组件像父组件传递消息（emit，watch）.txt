@@ -1,0 +1,74 @@
+1 在parent组件中引用child组件，需要加多一个事件的声明
+<ComponentCommunicationChildEmit> @child_page_value_changed="monitor_child"> </ComponentCommunicationChildEmit>
+
+2 在child组件中，对某个变量做监听(watch),发现有变化之后emit
+watch：{
+   value_in_child(new_value) {
+         //step2 注意这里的emit的第一个参数，是parent组件中定义的,第2个参数是传递给parent的值
+	 this.$emit('child_page_value_changed', new_value)
+   }
+
+}
+3  然后在parent中接收并处理这个emit
+monitor_child(new_value) {
+ this.value_in_parent = new_value
+}
+
+
+父组件代码：
+<template>
+  <div class="hello">
+    <p>本页面是parent页面, 会引用 ComponentCommunicationChildEmit </p>
+    value_in_parent:       {{value_in_parent}}
+    <br/>
+    <!-- 注意这里的@child_page_value_changed 它会响应 child组件中的emit event -->
+    <ComponentCommunicationChildEmit @child_page_value_changed="monitor_child">
+    </ComponentCommunicationChildEmit>    
+  </div>
+</template>
+
+<script>
+import ComponentCommunicationChildEmit from '@/components/ComponentCommunicationChildEmit'
+export default {
+  data () {
+    return {
+      value_in_parent: '',
+    }
+  }, 
+  components: {
+    ComponentCommunicationChildEmit
+  },
+  methods: {
+    monitor_child(new_value){
+      this.value_in_parent = new_value
+    }
+  }
+}
+</script>
+
+子组件代码：
+<template>
+  <div style='border: 1px solid red; margin-left: 50px; width: 500px'>
+    本页面是child，会以emit的形式向 parent页面传递变量 <br/>
+    
+    value_in_child: <input type="text" v-model="value_in_child"/>
+  </div>
+</template>
+
+<script>
+export default {
+  data () {
+    return {
+      value_in_child: "ssss"
+    }
+  },
+
+  watch: {
+    value_in_child(new_value){
+      this.$emit("child_page_value_changed", new_value)
+      console.info("changed and emitted, value: ", new_value)
+
+    }
+  }
+}
+</script>

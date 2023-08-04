@@ -1,0 +1,146 @@
+  <div id='app'>
+        下面是使用了自定义Directive的input, 可以自动聚焦（ 调用 focus() 方法) : <br/>
+        <br/>
+        <input v-myinput/>
+    </div>
+
+    <script>
+    Vue.createApp({
+        directives: {
+            myinput: {
+                mounted: function(element){
+                    element.focus()
+                }
+            }
+        }        
+    }).mount('#app')
+    </script>
+
+定义为myinput，实际使用时为v-myinput
+insterd 这是定义好的方法（钩子方法），表示页面诶vue.js渲染的过程中，在该dom被插入（insert）到页面时候被触发，内容是element.focus()
+
+如果希望把v-myinput的调用写成v-my-input
+directives: {
+		//注意下面的写法，用双引号括起来
+            "my-input": {
+                inserted: function(element){
+                    element.focus()
+                }
+            }
+        }   
+
+钩子方法完整列表：
+bind: 只运行一次，当元素首次被渲染时（绑定到页面时）
+insterd： 该元素插入到父节点时（也可以认为是该元素被vue渲染时）
+update: 该元素被更新时
+componentUpdated: 包含的component被更新时
+unbind：只运行一次，当该元素被vue.js从页面解除绑定时。
+
+
+----------------------------------------
+自定义diretive可以接受到的参数
+  <div id='app'>
+        下面是自定义Directive的binding的非常全面的例子(记得要打开控制台)： <br/>
+        <br/>
+        <input v-my-input:foo.click="say_hi" />
+    </div>
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    say_hi: '你好啊，我是个value'
+                }
+            },
+            directives: {
+                "my-input": {
+                    mounted: function(element, binding, vnode){
+                        element.focus()
+                        console.info("binding.name: " + binding.name)
+                        console.info("binding.value: " + binding.value)
+                        console.info("binding.expression: " + binding.expression)
+                        console.info("binding.argument: " + binding.arg)
+                        console.info("binding.modifiers: ")
+                        console.info(binding.modifiers)
+                        console.info("vnode keys:")
+                        console.info(vnode)
+                    }
+                }
+            }
+        }).mount('#app')
+
+钩子方法补充：
+created(el.binding,vnode,prevVnode): 创建时触发
+beforeMount():加载前触发
+mounted()：加载后触发
+beforeUpdate()：更新前触发
+updated()：更新后触发
+beforeUnmount()：卸载前触发
+unmounted()： 卸载后触发
+-------------------------------------------------
+由于vue.js默认使用了双向绑定，所以很容易在渲染大数据的时候使得页面变慢，所以我们可以使用自定义指令（Directive）实现。
+经过我的实际测试，<p>{{a_very_little_list}}</p>快过使用自定义指令的n倍。。。。。
+
+
+<div id='app'>
+        下面演示渲染一个5000条数据的自定义指令(directive) <br/>
+        <br/>
+        <p v-biglist="a_very_big_list"/></p>
+
+    </div>
+
+    <script>
+    Vue.createApp({
+        data(){
+            let a_very_big_list = []
+            for(let i = 0; i < 5000; i++){
+                a_very_big_list.push("I am the data:" + (i + 1))
+            }
+            return {
+                a_very_big_list: a_very_big_list
+            }
+        },
+        directives: {
+            biglist: {
+                mounted: function(element, binding){
+		    //这里没有使用双向绑定，而是直接通过innerHtml=来渲染的		
+                    for(let i = 0; i < binding.value.length; i++){
+                        element.innerHTML += binding.value[i] + "<br/>"
+                    }
+                }
+            }
+        }        
+    }).mount('#app')
+    </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

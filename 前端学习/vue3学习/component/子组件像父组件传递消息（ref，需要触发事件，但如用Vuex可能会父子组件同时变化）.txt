@@ -1,0 +1,80 @@
+1 父组件用最普通的方式引用子组件，但是加上了'ref'
+<componentComminicationChildRef ref="child"></componentComminicationChildRef>
+
+2 子组件的代码没有任何特殊的地方：
+//step2 在template绑定
+<input type='text' v-model="value_in_child">
+//step1 声明这个value_in_child
+data () {
+ return {
+    value_in_child: ''
+ }
+}
+
+3 在父组件中，增加一个按钮（可以是触发事件），可以通过this.$refs.child.value_in_child获得上面组件的值
+
+
+<input type="button" @click='get_child_value' value='获取child中变量的值'>
+
+
+methods:{
+	get_child_value(){
+ 		this.value_in_parent = this.$refs.child.value_in_child
+	}
+}
+
+
+父组件：
+<template>
+  <div class="hello">
+    <p>本页面是parent页面, 会引用 ComponentCommunicationChildRef </p>
+    <input type='button' @click='get_child_value' value="获取child中变量的值"/> :
+
+    value_in_parent:    {{value_in_parent}}  
+    <br/>
+    <ComponentCommunicationChildRef ref="child"></ComponentCommunicationChildRef>    
+  </div>
+</template>
+
+<script>
+import ComponentCommunicationChildRef from '@/components/ComponentCommunicationChildRef'
+export default {
+  data () {
+    return {
+      value_in_parent: '',
+    }
+  }, 
+  mounted(){
+  },
+  components: {
+    ComponentCommunicationChildRef
+  },
+  methods: {
+    get_child_value(){
+      this.value_in_parent = this.$refs.child.value_in_child
+    }
+  }
+}
+</script>
+
+子组件：
+<template>
+  <div style='border: 1px solid red; margin-left: 50px; width: 600px'>
+    本页面是child，会通过调用ref的形式来修改parent中的变量<br/>
+    
+    value_in_child: <input type="text" v-model="value_in_child"/>
+  </div>
+</template>
+
+<script>
+export default {
+  data () {
+    return {
+      value_in_child: ""
+    }
+  },
+}
+</script>
+
+
+

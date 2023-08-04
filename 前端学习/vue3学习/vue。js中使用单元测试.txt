@@ -1,0 +1,35 @@
+在生成一个webpack项目中后，它就内置了对于jest的支持
+  "devDependencies": {
+    "@vue/cli-plugin-unit-jest": "~4.5.0",//单元测试插件
+
+    "@vue/test-utils": "^2.0.0-0",//单元测试插件
+   
+    "vue-jest": "^5.0.0-0"//单元测试插件
+  }
+}
+测试步骤
+
+1 定位：假定有待测试的文件（src/li/calculator.js）
+
+2 创建单元测试文件（tests/unit/calculator.spec.js）
+
+import Calculator from '@/lib/calculator'
+
+describe('test Calculator', () => {
+  it('1 + 1 should == 2', () => {
+    expect(Calculator.sum(1,1)).toEqual(2)
+  })
+
+  it('3 + 4 should == 7', () => {
+    expect(Calculator.sum(3,4)).toEqual(7)
+  })
+
+  it('2 * 8 should == 16', () => {
+    expect(Calculator.multiply(2,8)).toEqual(16)
+  })
+
+})
+
+3 输入 npm run test:unit 就可以查看结果了
+expect是接收一个结果，.toEqual是把expect的结果跟期望值进行比较
+
