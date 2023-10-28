@@ -1,0 +1,46 @@
+
+
+
+PE（Physical Extend）：PE 是 LVM 中的物理扩展单位，通常大小为 4MB。卷以 PE 的形式存储，这是管理磁盘空间的最小单位。
+
+PV（Physical Volume）：物理卷，是将物理磁盘或分区格式化为 LVM 使用的单位，经过格式化后，PV 可以为逻辑卷提供 PE。
+
+VG（Volume Group）：卷组，VG 将多个 PE 组合在一起，形成一个卷组。VG 可以跨越多个物理磁盘，这使得在当前服务器磁盘空间不足时可以添加新磁盘，而不会对系统产生影响。
+
+LV（Logical Volume）：逻辑卷，是最终供用户使用的磁盘存储单元，其大小不应该超过 VG 剩余的空间。 LV 可以根据需要创建，而不受物理磁盘的限制。
+
+
+
+1 使用parted -l命令查看可以供使用的物理设备
+
+2 使用 pvcreate /dev/sdb1 /dev/sdc来创建物理卷（pv）
+3 pvs或者pvdisplay查看pv信息，pvremove /dev/sdc删除物理卷
+
+4 创建卷组，vgcreate myvg（自定义卷组名） /dev/sdb1
+5 vgs或者vgdisplay查看卷组信息（关注总PE数），vgremove myvg删除卷组
+
+
+6 创建逻辑卷lvcreate -n 逻辑卷名称 -l 逻辑卷PE数 卷组名
+lvcreate -n mylv -l 5119  myvg
+其中 -l 选项可以换成 -L ，用来只用以磁盘大小为单位的数值，比如说K、M、G、T等。但是这里的VG可用大小是5119PE和小于20.0G，使用G做单位不知道具体小于多小，不好给定一个具体的值，所以这里我们使用PE作为单位。
+7 使用lvs或者lvdisplay查看逻辑卷信息，lvremove /dev/myvg/mylv 删除逻辑卷
+
+
+ 
+8. 逻辑卷和物理分区一样，需要先格式化成合适的文件系统，然后挂载到某一个目录上就可以了，格式化分区和挂载分区与fdisk分区中的方法一样
+
+
+9 如果需要扩充容量，先扩充卷组，再扩充逻辑卷
+先用pvs查询下有无可扩充的磁盘，有的话，
+
+扩充卷组的命令是 vgextend myvg /dev/sdc
+扩充逻辑卷的命令是 lvextend -l +5119 /dev/myvg/mylv
+
+
+实际使用的时候，要让系统认得分区增加的容量
+
+对于xfs文件系统      xfs_growfs /dev/myvg/mylv 
+对于ext4文件系统     resize2fs命令
+如果觉得麻烦 甚至可以用 lvresize 命令，lvresize -l 2000 -r /dev/myvg/mylv，可以替代 lvextend 和 xfs_growfs/resize2fs 命令，这里的大小如果前面有"+"号，则代表增加大小，如果没有"+"但是设置的值比原来的大则也是增加大小。　　
+ 
+
