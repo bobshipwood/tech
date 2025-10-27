@@ -1,0 +1,15 @@
+apiVersion: v1 
+kind: Service 
+metadata:
+  name: mysql-router-nodeport 
+spec:
+  type: NodePort 
+  selector:
+    component: mysqlrouter                   # 匹配Router Pod标签 
+    mysql.oracle.com/cluster:  mycluster      # 匹配集群标识 
+    tier: mysql                              # 层级标签 
+  ports:
+  - name: mysql-rw 
+    port: 3306                              # 服务监听的端口（集群内部访问用）
+    targetPort: 6446                         # Router实际监听的端口 
+    nodePort: 31001                          # 节点暴露的端口（范围30000-32767）

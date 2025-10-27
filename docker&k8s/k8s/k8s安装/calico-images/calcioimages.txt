@@ -1,0 +1,8 @@
+calcioflex
+calcionode
+calciotypha
+calico-api
+calicocni
+calicocsi
+calico-egister
+calico-kube

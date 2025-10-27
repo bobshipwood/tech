@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: worker1-pv-1
+spec:
+  capacity:
+    storage: 50Gi
+  volumeMode: Filesystem
+  accessModes:
+  - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Delete # i think use Retain will be better.cause pvc delete.pv retain
+  #storageClassName: local-storage # offical`s case is named local-storage,and must create storageclass before  
+  storageClassName: ""
+  local:
+    path: /mysql_data_dir
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - worker1

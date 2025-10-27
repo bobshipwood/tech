@@ -1,0 +1,12 @@
+You need to enable a dedicated PPA with the following command:
+
+# sudo apt-get install --no-install-recommends software-properties-common
+# sudo add-apt-repository ppa:vbernat/haproxy-2.4
+
+
+Then, use the following command:
+
+# sudo apt-get install haproxy=2.4.\*
+
+
+sudo systemctl enable --now haproxy

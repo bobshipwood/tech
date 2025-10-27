@@ -1,0 +1,30 @@
+0 安装过程中，输入https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ 作为镜像地址
+
+1 在新安装的ubuntu18.04系统下安装
+
+2 
+sudo apt-get install build-essential
+sudo apt-get install libssl-dev
+sudo ./configure --prefix=/usr/local/keepalived
+
+sudo make 
+sudo make install
+
+3 cp  源码包中的路径/keepalived/keepalived.service  /etc/systemd/system/
+
+4 设置开机启动 
+sudo systemctl enable --now keepalived
+
+5 把keepalived的配置文件放置好
+
+sudo mkdir -p /etc/keepalived/
+sudo mv keepalived.conf /etc/keepalived/
+sudo mv check_apiserver.sh /etc/keepalived/
+
+6 chmod +x  /etc/keepalived/check_apiserver.sh
+
+7 重启配置文件sudo systemctl daemon-reload
+
+8 启动 sudo systemctl restart keepalived
+
+

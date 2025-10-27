@@ -1,0 +1,1 @@
+mirrors.tuna.tsinghua.edu.cn/ubuntu/
