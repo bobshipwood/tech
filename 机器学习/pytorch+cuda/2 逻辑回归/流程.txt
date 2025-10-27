@@ -1,0 +1,69 @@
+0    exam1  exam2  Pass
+       22         32         0
+       90         65         1
+ 
+1 读取数据
+import pandas as pd
+import numpy as np
+
+data = pd.read_csv('example.csv')
+data.head() # 输出前5行
+
+1.5 加mask
+# add label mask
+mask = data.loc[:, 'Pass'] == 1
+
+2 可视化数据
+from matplotlib impore pyplot as plt
+fig1 = plt.figure()
+passed = plt.scatter(data.loc[;, 'Exam1']【mask】, data.loc[:, 'Exam2']【mask】)
+failed = plt.scatter(data.loc[;, 'Exam1']【~mask】, data.loc[:, 'Exam2']【~mask】) // ~取反
+plt.title('Exam1-Exam2')
+plt.xlabel('Exam1')
+plt.ylabel('Exam2')
+plt.legend((passed,failed),('passed','failed')) # 右上角加入题注
+plt.show()
+
+
+3 将结果集赋值，进行训练
+X = data.drop(['Pass'], axis=1)  # 取左边的两列
+y = data.loc[:,'Pass']   # 取右边的一列
+x1 = data.loc[:, 'Exam1'] # 取左边的一列
+x2 = data.loc[:, 'Exam2'] # 取左边的第二列
+
+from sklearn.linear_model import LogisticRegression
+LR = LogisticRegression()
+LR.fit(X,y)   // 进行训练 
+
+4 评估模型结果
+y_predict = LR.predict(X)
+accuarcy = accuracy_score(y, y_predict)
+
+
+5 预测某个点是否通过
+# exam1=70, exam2=65
+y_test = LR.predict([70,65])
+print(y_test)  #输出为1
+
+#6 获取决策边界函数,并展示在图像上(theta0 + theta1 * x1 + theta2 * x2)
+theta0 =LR.intercept_
+theat1,theta2=LR.coef_[0][0]
+
+x2_new = -(theta0+theta1 * x1) / theta2
+
+fig3 = plt.figure()
+plt.plot(x1, x2_new)
+plt.show
+
+
+
+
+
+
+
+
+
+
+
+
+ 

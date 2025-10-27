@@ -1,0 +1,36 @@
+线性回归问题，其实就是通过一堆的数据点，找到y=kx+b的k和b值，怎么找到呢？
+那就要通过MSE来做评估，模型训练也就是通过一系列的求偏导的过程，来使得MSE最小，也就是使得损失函数最小，从而得到k和b的值
+
+
+
+
+
+0 
+MSE（均方误差）---> 越小越好
+R方值 (1 - MSE/方差)    --- 越接近1越好
+
+
+
+1 导入数据
+x_multi = data.drop(['Prize'], axis=1)
+
+2 执行训练得到w和b
+LR1 = LinearRegression()
+LR1.fit(x_multi,y)
+
+3 检验数据 
+y_predict_1 = LR1.predict(x_multi)
+
+4 评估训练结果
+mean_squared_error_1 = mean_squared_error(y,y_predict_1)    （MSE越小越好）
+r2_score_1 = r2_score(y,y_predict_1) （越接近1越好）
+ 
+
+5 预测价格
+x_test = [65000,5,5,30000,200]
+x_test = np.array(x_test).reshape(1,-1) # 整理数据格式
+y_test_predict = LR1.predict(x_test)
+预测出来的房屋价格
+
+
+
